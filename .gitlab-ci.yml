@@ -5,11 +5,10 @@ apply:
   stage: apply
   script:
     - echo "hi"
-    - sudo su -
-    - yum update
-    - yum install httpd
+    - sudo yum update
+    - sudo yum install httpd
     - echo "<h1>Hello This is done with Gitlab CI</h1>" > /var/www/html/index.html
-    - systemctl start httpd
-    - systemctl enable httpd
+    - sudo systemctl start httpd
+    - sudo systemctl enable httpd
   tags:
     - banuka
