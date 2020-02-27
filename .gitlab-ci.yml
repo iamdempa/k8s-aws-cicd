@@ -5,7 +5,10 @@ apply:
   stage: apply
   script:
     - echo "hi"
-    - sudo su -
-    - hostname
+    - sudo apt-get update
+    - sudo apt-get install httpd
+    - echo "<h1>Hello This is done with Gitlab CI</h1>" > /var/www/html/index.html
+    - sudo systemctl start httpd
+    - sudo systemctl enable httpd
   tags:
     - banuka
