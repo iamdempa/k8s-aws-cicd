@@ -5,6 +5,7 @@ apply:
   stage: apply
   script:
     - echo "hi"
+    - sudo su -
     - sudo apt-get install httpd -y
     - sudo systemctl start httpd
     - sudo systemctl enable httpd
