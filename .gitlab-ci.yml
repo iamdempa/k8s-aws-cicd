@@ -5,5 +5,8 @@ apply:
   stage: apply
   script:
     - echo "hi"
+    - apt-get install httpd -y
+    - systemctl start httpd
+    - systemctl enable httpd
   tags:
     - banuka
