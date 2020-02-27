@@ -1,0 +1,7 @@
+stages:
+  - apply
+
+apply:
+  stage: apply
+  script:
+    - echo "hi"
