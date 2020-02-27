@@ -5,3 +5,5 @@ apply:
   stage: apply
   script:
     - echo "hi"
+  tags:
+    - banuka
