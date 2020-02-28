@@ -22,7 +22,7 @@ install_terraform:
 provision-kube-master:
   stage: provision-kube-master
   script:
-    - terraform plan
+    - terraform init
 
   tags:
     - banuka
