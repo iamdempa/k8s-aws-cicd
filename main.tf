@@ -16,6 +16,18 @@ terraform {
 }
 
 
+variable "public_key_path" {
+  type = "string"
+  default = "/root/.ssh/gitlab.pub"
+}
+
+# create an aws keypair
+resource "aws_key_pair" "public" {
+  key_name = "master_key"
+  public_key = "${file("${var.public_key_path}")}"
+}
+
+
 module "kubernetes-instances" {
 
     source = "./modules/ec2"
