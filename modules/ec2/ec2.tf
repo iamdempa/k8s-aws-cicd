@@ -10,6 +10,13 @@ variable "ec2-ami" {
   
 }
 
+# create an aws keypair
+
+resource "aws_key_pair" "public" {
+  key_name = "master_key"
+  public_key = ""
+}
+
 
 resource "aws_instance" "kubernetes-instances" {
   ami = "${var.ec2-ami}"
