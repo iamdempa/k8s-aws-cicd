@@ -1,7 +1,7 @@
 terraform {
     backend "s3" {
-        bucket = "${var.bucket_name}"
+        bucket = "terraform-state-banuka-cicd"
         key = "terraform/terraform.tfstate"
-        region = "${var.bucket_region}"
+        region = "us-east-1"
     }
 }
