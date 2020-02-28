@@ -31,6 +31,8 @@ configure-tf-backend:
   script:
     - cd backend/
     - terraform init
+  tags:
+    - banuka
 
 provision-kube-master:
   stage: provision-kube-master
