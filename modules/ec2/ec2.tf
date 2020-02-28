@@ -11,11 +11,16 @@ variable "ec2-ami" {
 }
 
 
+variable "public_key_path" {
+  type = "string"
+  default = "/home/gitlab-runner/.ssh/gitlab.pub"
+}
 
 
 resource "aws_instance" "kubernetes-instances" {
   ami = "${var.ec2-ami}"
   instance_type = "${var.ec2-type}"
+  key_name = "${aws_key_pair.public}"
 
   # user_data = "${file(install_ansible.sh)}"
 
