@@ -17,7 +17,7 @@ terraform {
 
 
 resource "aws_key_pair" "public" {
-  key_name = "master_key"
+  key_name = "gitlab"
   public_key = "${file("${var.public_key_path}")}"
 }
 
