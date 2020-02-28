@@ -2,11 +2,12 @@ stages:
   - install-terraform
   - provision-kube-master
   
+  - destroy
+  
 
 before_script:
     - echo "hi"
-    - sudo yum update -y
-    - sudo yum install wget unzip -y
+    - sudo yum update -y && sudo yum install wget unzip -ys
 
 install_terraform:
   stage: install-terraform
@@ -29,3 +30,9 @@ provision-kube-master:
   tags:
     - banuka
 
+destroy:
+  stage: destroy
+  script:
+    - terraform destroy --auto-approve
+  tags:
+    - banuka
