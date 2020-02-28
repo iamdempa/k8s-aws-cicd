@@ -42,3 +42,4 @@ destroy:
     - terraform destroy --auto-approve
   tags:
     - banuka
+    
