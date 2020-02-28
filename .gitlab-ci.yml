@@ -1,9 +1,7 @@
 stages:
   - prerequisites-install
   - install-terraform
-  - create-s3-bucket
-  - configure-tf-backend
-  - provision-kube-master
+  - deploy
   
   - destroy
   
@@ -27,38 +25,13 @@ install_terraform:
   tags:
     - banuka
 
-
-create-s3-bucket:
-  stage: create-s3-bucket
+deploy:
+  stage: deploy
   script:
-    - cd s3/
-    - terraform init
-    - terraform plan
-    - terraform apply --auto-approve
-  tags:
-    - banuka
-
-configure-tf-backend:
-  stage: configure-tf-backend
-  script:
-    - cd backend
-    - pwd
-    - terraform init
-    - terraform plan
-    - terraform apply --auto-approve
-  tags:
-    - banuka
-
-provision-kube-master:
-  stage: provision-kube-master
-  script:
-    - pwd
     - terraform init
     - terraform plan
     - terraform apply --auto-approve
 
-  tags:
-    - banuka
 
 destroy:
   stage: destroy
@@ -67,4 +40,3 @@ destroy:
     - terraform destroy --auto-approve
   tags:
     - banuka
-    
