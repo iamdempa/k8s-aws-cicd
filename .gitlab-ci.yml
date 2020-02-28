@@ -51,6 +51,7 @@ configure-tf-backend:
 provision-kube-master:
   stage: provision-kube-master
   script:
+    - pwd
     - terraform init
     - terraform plan
     - terraform apply --auto-approve
