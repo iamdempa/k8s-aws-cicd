@@ -17,8 +17,8 @@ resource "aws_instance" "kubernetes-instances" {
 
   # user_data = "${file(install_ansible.sh)}"
 
-	user_data = << EOF
-		#! /bin/bash
+	user_data = <<EOF
+		#!/bin/bash
     sudo apt-get update
 		sudo apt-get install -y apache2
 		sudo systemctl start apache2
