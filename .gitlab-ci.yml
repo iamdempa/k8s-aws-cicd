@@ -17,6 +17,7 @@ ssh-publickey:
     - cd ~/.ssh
     - ls
     - uname
+    - pwd
   tags:
     - banuka
 
