@@ -11,8 +11,9 @@ stages:
 ssh-publickey:
   stage: ssh-publickey
   script: 
-    - mkdir -p .ssh
-    - echo $PUBLICKEY > .ssh/gitlab.pub
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo $PUBLICKEY > ~/.ssh/gitlab.pub
     - ls
   tags:
     - banuka
