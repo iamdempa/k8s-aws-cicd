@@ -18,7 +18,7 @@ terraform {
 
 variable "public_key_path" {
   type = "string"
-  default = "/home/gitlab-runner/.ssh"
+  default = "/home/gitlab-runner/.ssh/gitlab.pub"
 }
 
 # create an aws keypair
