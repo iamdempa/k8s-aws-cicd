@@ -1,11 +1,14 @@
 stages:
+  - prerequisites-install
   - install-terraform
   - provision-kube-master
   
   - destroy
   
 
-before_script:
+prerequisites-install:
+  stage: prerequisites-install
+  script:
     - echo "hi"
     - sudo yum update -y && sudo yum install wget unzip -y
 
@@ -33,6 +36,7 @@ provision-kube-master:
 destroy:
   stage: destroy
   script:
+    - terraform init
     - terraform destroy --auto-approve
   tags:
     - banuka
