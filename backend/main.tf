@@ -1,8 +1,14 @@
+variable "bucket_name" {
+    type = "string" 
+    default = "terraform-state-banuka-cicd"
+}
+
+
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "${local.bucket_name}"
+  bucket = "${var.bucket_name}"
   force_destroy = true
 
   tags = {
-      Name = "${local.bucket_name}"
+      Name = "${var.bucket_name}"
   }
 }
