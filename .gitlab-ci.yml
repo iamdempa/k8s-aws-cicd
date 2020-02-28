@@ -1,6 +1,7 @@
 stages:
   - prerequisites-install
   - install-terraform
+  - configure-tf-backend
   - provision-kube-master
   
   - destroy
@@ -24,6 +25,12 @@ install_terraform:
     - which terraform
   tags:
     - banuka
+
+configure-tf-backend:
+  stage: configure-tf-backend
+  script:
+    - cd backend/
+    - terraform init
 
 provision-kube-master:
   stage: provision-kube-master
