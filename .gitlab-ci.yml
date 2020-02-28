@@ -29,7 +29,8 @@ install_terraform:
 configure-tf-backend:
   stage: configure-tf-backend
   script:
-    - cd backend/
+    - cd backend
+    - pwd
     - terraform init
   tags:
     - banuka
