@@ -24,3 +24,6 @@ provision-kube-master:
   script:
     - terraform plan
 
+  tags:
+    - banuka
+
