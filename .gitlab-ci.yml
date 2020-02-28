@@ -1,6 +1,7 @@
 stages:
   - prerequisites-install
   - install-terraform
+  - create-s3-bucket
   - configure-tf-backend
   - provision-kube-master
   
@@ -23,6 +24,17 @@ install_terraform:
     - unzip terraform_${VER}_linux_amd64.zip
     - sudo mv terraform /usr/local/bin/
     - which terraform
+  tags:
+    - banuka
+
+
+create-s3-bucket:
+  stage: create-s3-bucket
+  script:
+    - cd s3/
+    - terraform init
+    - terraform plan
+    - terraform apply --auto-approve
   tags:
     - banuka
 
