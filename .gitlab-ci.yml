@@ -1,14 +1,20 @@
 stages:
-  - apply
+  - install-terraform
+  
 
-apply:
-  stage: apply
-  script:
+before_script:
     - echo "hi"
     - sudo yum update -y
-    - sudo yum install httpd -y
-    - sudo systemctl start httpd
-    - sudo systemctl enable httpd
+    - sudo yum install wget unzip -y
+
+install_terraform:
+  stage: install-terraform
+  script:
+    - export VER="0.12.9"
+    - wget https://releases.hashicorp.com/terraform/${VER}/terraform_${VER}_linux_amd64.zip
+    - unzip terraform_${VER}_linux_amd64.zip
+    - sudo mv terraform /usr/local/bin/
+    - which terraform
   tags:
     - banuka
 
