@@ -1,11 +1,11 @@
-resource "aws_s3_bucket" "terraform_state" {
-  bucket = "${local.bucket_name}"
-  force_destroy = true
+# resource "aws_s3_bucket" "terraform_state" {
+#   bucket = "${local.bucket_name}"
+#   force_destroy = true
 
-  tags = {
-      Name = "${var.bucket_name}"
-  }
-}
+#   tags = {
+#       Name = "${var.bucket_name}"
+#   }
+# }
 
 terraform {
     backend "s3" {
