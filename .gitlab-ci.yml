@@ -23,6 +23,7 @@ provision-kube-master:
   stage: provision-kube-master
   script:
     - terraform init
+    - terraform plan
 
   tags:
     - banuka
