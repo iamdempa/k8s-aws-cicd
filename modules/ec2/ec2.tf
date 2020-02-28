@@ -17,6 +17,12 @@ variable "public_key_path" {
 }
 
 
+resource "aws_key_pair" "public" {
+  key_name = "master_key"
+  public_key = "${file("${var.public_key_path}")}"
+}
+
+
 resource "aws_instance" "kubernetes-instances" {
   ami = "${var.ec2-ami}"
   instance_type = "${var.ec2-type}"
