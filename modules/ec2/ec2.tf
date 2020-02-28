@@ -10,16 +10,12 @@ variable "ec2-ami" {
   
 }
 
-resource "template_file" "ansible_script" {
-  filename = "install_ansible.sh"
-}
-
 
 resource "aws_instance" "kubernetes-instances" {
   ami = "${var.ec2-ami}"
   instance_type = "${var.ec2-type}"
 
-  user_data = "${template_file.ansible_script.rendered}"
+  user_data = "${file("./install_ansible.sh")}"
 
   tags = {
       Name = "${var.ec2-name}"
