@@ -7,7 +7,7 @@ stages:
 
 before_script:
     - echo "hi"
-    - sudo yum update -y && sudo yum install wget unzip -ys
+    - sudo yum update -y && sudo yum install wget unzip -y
 
 install_terraform:
   stage: install-terraform
