@@ -11,3 +11,4 @@ apply:
     - sudo systemctl enable httpd
   tags:
     - banuka
+    
