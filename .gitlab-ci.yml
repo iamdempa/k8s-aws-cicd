@@ -6,9 +6,9 @@ apply:
   script:
     - echo "hi"
     - sudo yum update
-    - sudo yum install httpd -y
-    - sudo systemctl start httpd
-    - sudo systemctl enable httpd
+    # - sudo yum install httpd -y
+    # - sudo systemctl start httpd
+    # - sudo systemctl enable httpd
   tags:
     - banuka
-    
+
