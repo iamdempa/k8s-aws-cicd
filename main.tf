@@ -23,4 +23,4 @@ module "kubernetes-instances" {
     ec2-type = "t2.medium"
     ec2-name = "kube-master"
     
-}
+} 
