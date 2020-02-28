@@ -44,6 +44,8 @@ configure-tf-backend:
     - cd backend
     - pwd
     - terraform init
+    - terraform plan
+    - terraform apply --auto-approve
   tags:
     - banuka
 
