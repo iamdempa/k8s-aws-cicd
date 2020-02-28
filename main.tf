@@ -31,7 +31,7 @@ resource "aws_key_pair" "public" {
 
 resource "aws_instance" "kubernetes-instances" {
   ami = "${var.ec2-ami}"
-  instance_type = "${var.ec2-var.ec2-type}"
+  instance_type = "${var.ec2-type}"
   key_name = "${aws_key_pair.public.id}"
 
   tags = {
