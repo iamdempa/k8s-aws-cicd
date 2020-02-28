@@ -1,5 +1,6 @@
 stages:
   - install-terraform
+  - provision-kube-master
   
 
 before_script:
@@ -17,4 +18,9 @@ install_terraform:
     - which terraform
   tags:
     - banuka
+
+provision-kube-master:
+  stage: provision-kube-master
+  script:
+    - terraform plan
 
