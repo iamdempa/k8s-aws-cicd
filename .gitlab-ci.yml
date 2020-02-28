@@ -1,6 +1,7 @@
 stages:
   - prerequisites-install
   - install-terraform
+  - install-ansible
   - deploy
   
   - destroy
@@ -33,7 +34,10 @@ deploy:
     - terraform apply --auto-approve
   tags:
     - banuka
-    
+
+
+
+
 
 
 destroy:
