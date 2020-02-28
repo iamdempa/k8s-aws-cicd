@@ -33,6 +33,7 @@ deploy:
     - terraform apply --auto-approve
   tags:
     - banuka
+    
 
 
 destroy:
