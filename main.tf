@@ -83,6 +83,7 @@ resource "aws_instance" "kubernetes-master" {
   key_name = "${aws_key_pair.public.id}"
   subnet_id = "${aws_subnet.kube-master-subnet.id}"
   vpc_security_group_ids = ["${aws_security_group.sg-kube-master-allow-ssh.id}"]
+  associate_public_ip_address = true
 
   tags = {
       Name = "${var.kube-master}"
