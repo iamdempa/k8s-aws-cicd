@@ -80,7 +80,7 @@ resource "aws_key_pair" "public" {
 resource "aws_instance" "kubernetes-master" {
   ami = "${var.ec2-ami}"
   instance_type = "${var.ec2-type}"
-  key_name = "${aws_key_pair.public.id}"
+  key_name = "${aws_key_pair.public.name}"
   subnet_id = "${aws_subnet.kube-master-subnet.id}"
   vpc_security_group_ids = ["${aws_security_group.sg-kube-master-allow-ssh.id}"]
   associate_public_ip_address = true
