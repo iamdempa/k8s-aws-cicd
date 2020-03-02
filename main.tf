@@ -74,7 +74,7 @@ resource "aws_security_group" "sg-kube-master-allow-ssh" {
 resource "aws_security_group" "sg-kube-minions-allow-ssh" {
   name = "kubernetes-minion-sg"
   description = "sg to not to allow any inbound traffic, only outbound traffic"
-  vpc_id = "${aws_vpc.kubernetes-vpc}"
+  vpc_id = "${aws_vpc.kubernetes-vpc.id}"
 
   ingress {
     from_port = 0
@@ -109,7 +109,7 @@ resource "aws_eip" "kubernetes_eip_for_ngw" {
 # NGW
 resource "aws_nat_gateway" "kubernetes-ngw" {
   allocation_id = "${aws_eip.kubernetes_eip_for_ngw.id}"
-  subnet_id = "${aws_subnet.kube-master-subnet}"
+  subnet_id = "${aws_subnet.kube-master-subnet.id}"
 
   tags = {
     Name = "kubernetes-ngw"
