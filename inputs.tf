@@ -35,6 +35,6 @@ variable "kube-master_cidr" {
 
 variable "kube-minion_cidr" {
   type = "string"
-  default = "0.0.8.0/21"
+  default = "10.0.8.0/21"
 }
 
