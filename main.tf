@@ -81,7 +81,7 @@ resource "aws_internet_gateway" "kubernetes-igw" {
 
 # Route Table for kube-master
 resource "aws_route_table" "kube-master-rt" {
-  vpc_id = "${aws_vpc.kubernetes-vpc}"
+  vpc_id = "${aws_vpc.kubernetes-vpc.id}"
 
   route {
     cidr_block = "0.0.0.0/0"
