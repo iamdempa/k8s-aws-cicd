@@ -15,7 +15,6 @@ terraform {
     }
 }
 
-
 # VPC
 resource "aws_vpc" "kubernetes-vpc" {
   cidr_block = "${var.vpc_cidr_block}"
@@ -45,7 +44,6 @@ resource "aws_subnet" "kube-minion-subnet" {
   }
 }
 
-
 # Security Group for master
 resource "aws_security_group" "sg-kube-master-allow-ssh" {
   name = "kubernetes-master-sg"
@@ -71,14 +69,12 @@ resource "aws_security_group" "sg-kube-master-allow-ssh" {
   }
 }
 
-
 # Key pair
 resource "aws_key_pair" "public" {
   key_name = "gitlab"
   public_key = "${file("${var.public_key_path}")}"
 }
  
-
 # Kube-master
 resource "aws_instance" "kubernetes-master" {
   ami = "${var.ec2-ami}"
