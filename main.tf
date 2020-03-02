@@ -69,3 +69,18 @@ resource "aws_instance" "kubernetes-master" {
   }
   
 }
+
+# Security Group for master
+resource "aws_security_group" "kube-master-allow-ssh" {
+  name = "kubernetes-master sg"
+  description = "sg to allow only ssh access to kube-master"
+  vpc_id = "${aws_vpc.kubernetes-vpc.id}"
+
+  ingress {
+    from_port = 22
+    to_port = 22
+    protocol = "ssh"
+
+    cidr_blocks = "0.0.0.0/0"
+  }
+}
