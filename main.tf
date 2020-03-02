@@ -59,6 +59,10 @@ resource "aws_security_group" "sg-kube-master-allow-ssh" {
 
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  tags = {
+    Name = "kubernetes-master-sg"
+  }
 }
 
 
