@@ -154,10 +154,10 @@ resource "aws_route_table_association" "kube-master-association" {
 }
 
 # Associate the kube-minion subnet
-resource "aws_route_table_association" "kube-minion-association" {
-  subnet_id = "${aws_subnet.kube-minion-subnet.id}"
-  route_table_id = "${aws_route_table.kube-minion-rt.id}"
-}
+# resource "aws_route_table_association" "kube-minion-association" {
+#   subnet_id = "${aws_subnet.kube-minion-subnet.id}"
+#   route_table_id = "${aws_route_table.kube-minion-rt.id}"
+# }
 
 
 # Key pair
