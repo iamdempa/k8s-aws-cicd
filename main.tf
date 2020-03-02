@@ -116,6 +116,14 @@ resource "aws_instance" "kubernetes-master" {
   vpc_security_group_ids = ["${aws_security_group.sg-kube-master-allow-ssh.id}"]
   associate_public_ip_address = true
 
+  user_data = <<EOF
+    #!/bin/bash
+    sudo apt-get update -y
+    sudo apt install apache2 -y
+    sudo start apache2
+    sudo enable apache2
+  EOF
+
   tags = {
       Name = "${var.kube-master}"
   }
