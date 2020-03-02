@@ -5,7 +5,13 @@ variable "public_key_path" {
 
 variable "ec2-ami" {
   type = "string"
-  default = "ami-07ebfd5b3428b6f4d"
+
+  # ubuntu
+  # default = "ami-07ebfd5b3428b6f4d"
+
+  #centos
+  default = "ami-002cc39e7bf021a77"
+
 }
 
 variable "ec2-type" {
