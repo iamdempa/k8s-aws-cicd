@@ -7,10 +7,10 @@ variable "ec2-ami" {
   type = "string"
 
   # ubuntu
-  default = "ami-07ebfd5b3428b6f4d"
+  # default = "ami-07ebfd5b3428b6f4d"
 
   #centos
-  # default = "ami-002cc39e7bf021a77"
+  default = "ami-0a887e401f7654935"
 
 }
 
