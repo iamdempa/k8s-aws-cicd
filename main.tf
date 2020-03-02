@@ -62,7 +62,7 @@ resource "aws_instance" "kubernetes-master" {
   ami = "${var.ec2-ami}"
   instance_type = "${var.ec2-type}"
   key_name = "${aws_key_pair.public.id}"
-  subnet_id = "${aws_subnet.kube-master-subnet}"
+  subnet_id = "${aws_subnet.kube-master-subnet.id}"
 
   tags = {
       Name = "${var.kube-master}"
