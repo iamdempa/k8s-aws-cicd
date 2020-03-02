@@ -22,3 +22,19 @@ variable "kube-minion" {
   type = "string"
   default = "kube-minion"
 }
+
+variable "vpc_cidr_block" {
+  type = "string"
+  default = "10.0.0.0/16"
+}
+
+variable "kube-master_cidr" {
+  type = "string"
+  default = "10.0.0.0/21"
+}
+
+variable "kube-minion_cidr" {
+  type = "string"
+  default = "0.0.8.0/21"
+}
+

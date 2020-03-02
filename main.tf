@@ -15,6 +15,36 @@ terraform {
     }
 }
 
+
+# VPC
+resource "aws_vpc" "kubernetes-vpc" {
+  cidr_block = "${var.vpc_cidr_block}"
+
+  tags = {
+    Name = "kubernetes-vpc"
+  }
+}
+
+# Kube-master Subnet
+resource "aws_subnet" "kube-master-subnet" {
+  vpc_id = "${aws_vpc.kubernetes-vpc.id}"
+  cidr_block = "${var.kube-master_cidr}"
+
+  tags = {
+    Name = "kube-master-subnet"
+  }
+}
+
+# Kube-minion Subnet
+resource "aws_subnet" "kube-minion-subnet" {
+  vpc_id = "${aws_vpc.kubernetes-vpc.id}"
+  cidr_block = "${var.kube-minion_cidr}"
+
+  tags = {
+    Name = "kube-minion-subnet"
+  }
+}
+
 resource "aws_key_pair" "public" {
   key_name = "gitlab"
   public_key = "${file("${var.public_key_path}")}"
@@ -28,10 +58,11 @@ resource "aws_key_pair" "public" {
 #     ec2-name = "kube-master"
 # } 
 
-resource "aws_instance" "kubernetes-instances" {
+resource "aws_instance" "kubernetes-master" {
   ami = "${var.ec2-ami}"
   instance_type = "${var.ec2-type}"
   key_name = "${aws_key_pair.public.id}"
+  subnet_id = "${aws_subnet.kube-master-subnet}"
 
   tags = {
       Name = "${var.kube-master}"
