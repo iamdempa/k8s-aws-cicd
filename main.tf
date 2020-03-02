@@ -72,7 +72,7 @@ resource "aws_security_group" "sg-kube-master-allow-ssh" {
 
 # IGW
 resource "aws_internet_gateway" "kubernetes-igw" {
-  vpc_id = "${aws_vpc.kubernetes-vpc}"
+  vpc_id = "${aws_vpc.kubernetes-vpc.id}"
 
   tags = {
     Name = "kubernetes-igw"
