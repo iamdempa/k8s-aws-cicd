@@ -123,8 +123,13 @@ resource "aws_instance" "kubernetes-master" {
   vpc_security_group_ids = ["${aws_security_group.sg-kube-master-allow-ssh.id}"]
   associate_public_ip_address = true
 
-  user_data = "${file("user_data.sh")}"
-
+  user_data = <<-EOF
+              #!/bin/bash
+              yum install httpd -y
+              yum update -y
+              systemctl start httpd
+              systemctl enable httpd
+              EOF
   tags = {
       Name = "${var.kube-master}"
   }
