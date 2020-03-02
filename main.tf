@@ -95,7 +95,7 @@ resource "aws_route_table" "kube-master-rt" {
 
 # Associate the kube-master subnet
 resource "aws_route_table_association" "kube-master-association" {
-  subnet_id = "${aws_subnet.kube-master-subnet}"
+  subnet_id = "${aws_subnet.kube-master-subnet.id}"
   route_table_id = "${aws_route_table.kube-master-rt.id}"
 }
 
