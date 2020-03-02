@@ -107,15 +107,15 @@ resource "aws_eip" "kubernetes_eip_for_ngw" {
 }
 
 
-# NGW
-resource "aws_nat_gateway" "kubernetes-ngw" {
-  allocation_id = "${aws_eip.kubernetes_eip_for_ngw.id}"
-  subnet_id = "${aws_subnet.kube-master-subnet.id}"
+# NGW - commenting since SLIIT doesn't allow this
+# resource "aws_nat_gateway" "kubernetes-ngw" {
+#   allocation_id = "${aws_eip.kubernetes_eip_for_ngw.id}"
+#   subnet_id = "${aws_subnet.kube-master-subnet.id}"
 
-  tags = {
-    Name = "kubernetes-ngw"
-  }
-}
+#   tags = {
+#     Name = "kubernetes-ngw"
+#   }
+# }
 
 
 # Route Table for kube-master
@@ -132,19 +132,19 @@ resource "aws_route_table" "kube-master-rt" {
   }
 }
 
-# Route Table for kube-minion
-resource "aws_route_table" "kube-minion-rt" {
-  vpc_id = "${aws_vpc.kubernetes-vpc.id}"
+# Route Table for kube-minion - commenting since SLIIT doesn't allow to create NGW and this uses it
+# resource "aws_route_table" "kube-minion-rt" {
+#   vpc_id = "${aws_vpc.kubernetes-vpc.id}"
 
-  route {
-    cidr_block = "0.0.0.0/0"
-    nat_gateway_id = "${aws_nat_gateway.kubernetes-ngw.id}"
-  }
+#   route {
+#     cidr_block = "0.0.0.0/0"
+#     nat_gateway_id = "${aws_nat_gateway.kubernetes-ngw.id}"
+#   }
 
-  tags = {
-    Name = "kube-minion-rt"
-  }
-}
+#   tags = {
+#     Name = "kube-minion-rt"
+#   }
+# }
 
 
 # Associate the kube-master subnet
