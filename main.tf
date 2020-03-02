@@ -81,6 +81,6 @@ resource "aws_security_group" "kube-master-allow-ssh" {
     to_port = 22
     protocol = "ssh"
 
-    cidr_blocks = "0.0.0.0/0"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
