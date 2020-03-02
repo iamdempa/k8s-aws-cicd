@@ -70,7 +70,6 @@ resource "aws_security_group" "sg-kube-master-allow-ssh" {
   }
 }
 
-
 #Security Group for minions
 resource "aws_security_group" "sg-kube-minions-allow-ssh" {
   name = "kubernetes-minion-sg"
@@ -134,7 +133,7 @@ resource "aws_route_table" "kube-master-rt" {
 
 # Route Table for kube-minion
 resource "aws_route_table" "kube-minion-rt" {
-  vpc_id = "${aws_vpc.kubernetes-vpc}"
+  vpc_id = "${aws_vpc.kubernetes-vpc.id}"
 
   route {
     cidr_block = "0.0.0.0/0"
