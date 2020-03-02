@@ -48,7 +48,7 @@ resource "aws_subnet" "kube-minion-subnet" {
 
 # Security Group for master
 resource "aws_security_group" "sg-kube-master-allow-ssh" {
-  name = "kubernetes-master sg"
+  name = "kubernetes-master-sg"
   description = "sg to allow only ssh access to kube-master"
   vpc_id = "${aws_vpc.kubernetes-vpc.id}"
 
