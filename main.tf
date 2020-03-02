@@ -70,6 +70,35 @@ resource "aws_security_group" "sg-kube-master-allow-ssh" {
   }
 }
 
+# IGW
+resource "aws_internet_gateway" "kubernetes-igw" {
+  vpc_id = "${aws_vpc.kubernetes-vpc}"
+
+  tags = {
+    Name = "kubernetes-igw"
+  }
+}
+
+# Route Table for kube-master
+resource "aws_route_table" "kube-master-rt" {
+  vpc_id = "${aws_vpc.kubernetes-vpc}"
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = "${aws_internet_gateway.kubernetes-igw.id}"
+  }
+
+  tags = {
+    Name = "kube-master-rt"
+  }
+}
+
+# Associate the kube-master subnet
+resource "aws_route_table_association" "kube-master-association" {
+  subnet_id = "${aws_subnet.kube-master-subnet}"
+  route_table_id = "${aws_route_table.kube-master-rt.id}"
+}
+
 # Key pair
 resource "aws_key_pair" "public" {
   key_name = "gitlab"
@@ -80,6 +109,7 @@ resource "aws_key_pair" "public" {
 resource "aws_instance" "kubernetes-master" {
   ami = "${var.ec2-ami}"
   instance_type = "${var.ec2-type}"
+  
   key_name = "${aws_key_pair.public.key_name}"
 
   subnet_id = "${aws_subnet.kube-master-subnet.id}"
