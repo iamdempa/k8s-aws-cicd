@@ -45,33 +45,9 @@ resource "aws_subnet" "kube-minion-subnet" {
   }
 }
 
-resource "aws_key_pair" "public" {
-  key_name = "gitlab"
-  public_key = "${file("${var.public_key_path}")}"
-}
-
-# module "kubernetes-instances" {
-
-#     source = "./modules/ec2"
-#     ec2-ami = "ami-07ebfd5b3428b6f4d"
-#     ec2-type = "t2.medium"
-#     ec2-name = "kube-master"
-# } 
-
-resource "aws_instance" "kubernetes-master" {
-  ami = "${var.ec2-ami}"
-  instance_type = "${var.ec2-type}"
-  key_name = "${aws_key_pair.public.id}"
-  subnet_id = "${aws_subnet.kube-master-subnet.id}"
-
-  tags = {
-      Name = "${var.kube-master}"
-  }
-  
-}
 
 # Security Group for master
-resource "aws_security_group" "kube-master-allow-ssh" {
+resource "aws_security_group" "sg-kube-master-allow-ssh" {
   name = "kubernetes-master sg"
   description = "sg to allow only ssh access to kube-master"
   vpc_id = "${aws_vpc.kubernetes-vpc.id}"
@@ -83,4 +59,26 @@ resource "aws_security_group" "kube-master-allow-ssh" {
 
     cidr_blocks = ["0.0.0.0/0"]
   }
+}
+
+
+# Key pair
+resource "aws_key_pair" "public" {
+  key_name = "gitlab"
+  public_key = "${file("${var.public_key_path}")}"
+}
+ 
+
+# Kube-master
+resource "aws_instance" "kubernetes-master" {
+  ami = "${var.ec2-ami}"
+  instance_type = "${var.ec2-type}"
+  key_name = "${aws_key_pair.public.id}"
+  subnet_id = "${aws_subnet.kube-master-subnet.id}"
+  vpc_security_group_ids = ["${aws_security_group.sg-kube-master-allow-ssh.id}"]
+
+  tags = {
+      Name = "${var.kube-master}"
+  }
+  
 }
