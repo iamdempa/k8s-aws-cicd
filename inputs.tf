@@ -37,4 +37,3 @@ variable "kube-minion_cidr" {
   type = "string"
   default = "10.0.8.0/21"
 }
-
