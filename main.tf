@@ -178,7 +178,7 @@ resource "aws_instance" "kubernetes-master" {
   ami = "${var.ec2-ami}"
   instance_type = "${var.ec2-type}"
 
-  count = 3
+  # count = 3
   
   key_name = "${aws_key_pair.public.key_name}"
 
@@ -197,7 +197,7 @@ resource "aws_instance" "kubernetes-master" {
               sh -c "echo \"PasswordAuthentication yes\" >> /etc/ssh/ssh_config"
               systemctl restart sshd
               su - ansadmin
-              ssh-copy-id
+              # ssh-copy-id
             EOF
   tags = {
       Name = "${count.index == 1 ? "kube-master" : "kube-minion-${count.index}"}"
