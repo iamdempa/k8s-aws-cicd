@@ -58,12 +58,12 @@ resource "aws_security_group" "sg-kube-master-allow-ssh" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  ingress {
-    from_port = 80
-    to_port = 80
-    protocol = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+  # ingress {
+  #   from_port = 80
+  #   to_port = 80
+  #   protocol = "tcp"
+  #   cidr_blocks = ["0.0.0.0/0"]
+  # }
 
   egress {
     from_port = 0
@@ -177,6 +177,8 @@ resource "aws_key_pair" "public" {
 resource "aws_instance" "kubernetes-master" {
   ami = "${var.ec2-ami}"
   instance_type = "${var.ec2-type}"
+
+  count = 3
   
   key_name = "${aws_key_pair.public.key_name}"
 
@@ -186,13 +188,18 @@ resource "aws_instance" "kubernetes-master" {
 
   user_data = <<-EOF
               #!/bin/bash
-              yum install httpd -y
+              sudo su -
               yum update -y
-              systemctl start httpd
-              systemctl enable httpd
-              EOF
+              yum install amazon-linux-extras install ansible2 -y
+              useradd ansadmin
+              passwd ansadmin
+              sh -c "echo \"ansadmin ALL=(ALL) NOPASSWD: ALL\" >> /etc/sudoers"
+              sh -c "echo \"PasswordAuthentication yes\" >> /etc/ssh/ssh_config"
+              systemctl restart sshd
+              su - ansadmin
+              ssh-copy-id
+            EOF
   tags = {
-      Name = "${var.kube-master}"
+      Name = "${count.index == 1 ? "kube-master" : "kube-minion-${count.index}"}"
   }
 }
-
