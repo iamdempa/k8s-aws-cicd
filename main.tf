@@ -200,6 +200,6 @@ resource "aws_instance" "kubernetes-master" {
               # ssh-copy-id
             EOF
   tags = {
-      Name = "${count.index == 1 ? "kube-master" : "kube-minion-${count.index}"}"
+      Name = "${count.index == 0 ? "kube-master" : "kube-minion-${count.index}"}"
   }
 }
