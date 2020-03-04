@@ -193,10 +193,10 @@ resource "aws_instance" "kubernetes-master" {
   vpc_security_group_ids = ["${aws_security_group.sg-kube-master-allow-ssh.id}"]
   associate_public_ip_address = true
 
-  # user_data = <<-EOF
-  #             #!/bin/bash
-              
-  #           EOF
+  user_data = <<-EOF
+              #!/bin/bash
+              echo ${file("${var.public_key_path}")} >> ~/.ssh/authorized_keys
+            EOF
 
   tags = {
       Name = "${count.index == 0 ? "kube-master" : "kube-minion-${count.index}"}"
@@ -204,8 +204,5 @@ resource "aws_instance" "kubernetes-master" {
 }
 
 
-output "content" {
-  value = "${file("${var.public_key_path}")}"
-}
 
 # kube-minion
