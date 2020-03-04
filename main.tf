@@ -195,13 +195,17 @@ resource "aws_instance" "kubernetes-master" {
 
   # user_data = <<-EOF
   #             #!/bin/bash
-  #             sudo yum update -y
-  #             sudo amazon-linux-extras install ansible2 -y              
+              
   #           EOF
 
   tags = {
       Name = "${count.index == 0 ? "kube-master" : "kube-minion-${count.index}"}"
   }
+}
+
+
+output "content" {
+  value = "machan"
 }
 
 # kube-minion
