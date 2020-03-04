@@ -198,7 +198,6 @@ resource "aws_instance" "kubernetes-master" {
       "sudo mkdir banuka",
     ]
   }
-
   # user_data = <<-EOF
   #             #!/bin/bash
   #             su - ec2-user              
