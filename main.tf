@@ -195,7 +195,7 @@ resource "aws_instance" "kubernetes-master" {
 
   provisioner "remote-exec" {
     inline = [
-      "mkdir banuka",
+      "sudo mkdir banuka",
     ]
   }
 
