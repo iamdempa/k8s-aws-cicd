@@ -186,6 +186,7 @@ resource "aws_key_pair" "public" {
 # kube-master
 resource "aws_instance" "kubernetes-master" {
   ami = "${var.ec2-ami}"
+  count = 3
   instance_type = "${var.ec2-type}"
   key_name = "${aws_key_pair.public.key_name}"
   subnet_id = "${aws_subnet.kube-master-subnet.id}"
