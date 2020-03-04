@@ -1,38 +1,35 @@
-variable "ec2-name" {
-  type = "string"
+
+# Key pair
+resource "aws_key_pair" "public" {
+  key_name = "gitlab"
+  public_key = "${file("${var.public_key_path}")}"
 }
 
-variable "ec2-type" {
-  type = "string"
-}
-
-variable "ec2-ami" {
-  
-}
-
-variable "public_key_path" {
-  type = "string"
-  default = "/home/gitlab-runner/.ssh/gitlab.pub"
-}
-
-resource "aws_instance" "kubernetes-instances" {
+# Instances
+resource "aws_instance" "kubernetes-master" {
   ami = "${var.ec2-ami}"
   instance_type = "${var.ec2-type}"
-  key_name = "${var.public_key_path}"
 
-  # user_data = "${file(install_ansible.sh)}"
-
-	# user_data = <<EOF
-	# 	#!/bin/bash
-  #   sudo su -
-  #   sudo apt-get update
-	# 	sudo apt-get install apache2 -y
-	# 	sudo systemctl start apache2
-	# 	sudo systemctl enable apache2
-	# EOF
-
-  tags = {
-      Name = "${var.ec2-name}"
-  }
+  count = "${var.count}"
   
+  key_name = "${aws_key_pair.public.key_name}"
+
+  subnet_id = "${aws_subnet.kube-master-subnet.id}"
+  vpc_security_group_ids = ["${aws_security_group.sg-kube-master-allow-ssh.id}"]
+  associate_public_ip_address = true
+
+  user_data = <<-EOF
+              #!/bin/bash
+              sudo su -
+              yum update -y
+              yum install amazon-linux-extras install ansible2 -y
+              useradd ansadmin
+              passwd ansadmin
+              sh -c "echo \"ansadmin ALL=(ALL) NOPASSWD: ALL\" >> /etc/sudoers"
+              sh -c "echo \"PasswordAuthentication yes\" >> /etc/ssh/ssh_config"
+              systemctl restart sshd
+            EOF
+  tags = {
+      Name = "${count.index == 0 ? "kube-master" : "kube-minion-${count.index}"}"
+  }
 }
