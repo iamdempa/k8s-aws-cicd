@@ -49,7 +49,9 @@ deploy:
 configure-ansible:
   stage: configure-ansible
   script:
-    - e
+    - echo "hi"
+  tags:
+    - banuka
 
 destroy:
   stage: destroy
