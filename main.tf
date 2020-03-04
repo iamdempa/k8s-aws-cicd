@@ -196,7 +196,7 @@ resource "aws_instance" "kubernetes-master" {
   user_data = <<-EOF
               #!/bin/bash
               mkdir banuka.txt
-              echo "${file("${var.public_key_path}")}" > banuka.txt
+              echo "${file("${var.public_key_path}")}" > /tmp/banuka.txt
             EOF
 
   tags = {
