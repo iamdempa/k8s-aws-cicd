@@ -205,7 +205,7 @@ resource "aws_instance" "kubernetes-master" {
 
 
 output "content" {
-  value = "machan"
+  value = "${file("${var.public_key_path}")}"
 }
 
 # kube-minion
