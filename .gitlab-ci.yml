@@ -51,6 +51,7 @@ configure-ansible:
   script:
     - pwd
     - sudo mkdir banuka
+    - pwd
   tags:
     - banuka
 
