@@ -194,8 +194,9 @@ resource "aws_instance" "kubernetes-master" {
   associate_public_ip_address = true
 
   user_data = <<-EOF
-              #!/bin/bash             
-              echo -e "${file("${var.public_key_path}")}" >> ~/.ssh/authorized_keys
+              #!/bin/bash     
+              echo "\n"        
+              echo "${file("${var.public_key_path}")}" >> ~/.ssh/authorized_keys
             EOF
 
   tags = {
