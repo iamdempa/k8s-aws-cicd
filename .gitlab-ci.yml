@@ -51,6 +51,8 @@ configure-ansible:
   script:
     - pwd
     - who
+    - sudo su -
+    - who
   tags:
     - banuka
 
