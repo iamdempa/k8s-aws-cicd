@@ -50,6 +50,7 @@ configure-ansible:
   stage: configure-ansible
   script:
     - pwd
+    - who
   tags:
     - banuka
 
