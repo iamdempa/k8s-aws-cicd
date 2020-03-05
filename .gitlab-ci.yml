@@ -50,10 +50,6 @@ configure-ansible:
   stage: configure-ansible
   script:
     - pwd
-    - cd ..
-    - pwd
-    - sudo su -
-    - pwd
   tags:
     - banuka
 
