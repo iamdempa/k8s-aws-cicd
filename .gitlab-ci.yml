@@ -19,8 +19,7 @@ ssh-publickey:
     - sudo cp ~/.ssh/gitlab.pem /home/ec2-user/.ssh/id_rsa
     - sudo cp ~/.ssh/gitlab.pub /home/ec2-user/.ssh/id_rsa.pub
     - cd ~/.ssh
-    - sudo su - 
-    - cd /home/ec2-user/
+    - sudo cd /home/ec2-user/
     - pwd
   tags:
     - banuka
