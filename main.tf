@@ -193,11 +193,11 @@ resource "aws_instance" "kubernetes-master" {
   vpc_security_group_ids = ["${aws_security_group.sg-kube-master-allow-ssh.id}"]
   associate_public_ip_address = true
 
-  provisioner "remote-exec" {
-    inline = [
-      "sudo mkdir banuka",
-    ]
-  }
+  # provisioner "remote-exec" {
+  #   inline = [
+  #     "sudo mkdir banuka",
+  #   ]
+  # }
   user_data = <<-EOF
               #!/bin/bash
               # sudo hostnamectl set-hostname ${count.index == 0 ? "kube-master" : "kube-minion-${count.index}"}
