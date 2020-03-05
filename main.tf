@@ -198,7 +198,6 @@ resource "aws_instance" "kubernetes-master" {
       "sudo mkdir banuka",
     ]
   }
-
   # user_data = <<-EOF
   #             #!/bin/bash
   #             sudo hostnamectl set-hostname ${count.index == 0 ? "kube-master" : "kube-minion-${count.index}"}
