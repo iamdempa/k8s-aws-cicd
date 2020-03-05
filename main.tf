@@ -193,14 +193,9 @@ resource "aws_instance" "kubernetes-master" {
   vpc_security_group_ids = ["${aws_security_group.sg-kube-master-allow-ssh.id}"]
   associate_public_ip_address = true
 
-  # provisioner "remote-exec" {
-  #   inline = [
-  #     "sudo mkdir banuka",
-  #   ]
-  # }
   user_data = <<-EOF
               #!/bin/bash
-              # sudo hostnamectl set-hostname ${count.index == 0 ? "kube-master" : "kube-minion-${count.index}"}
+              
               su - ec2-user              
               echo "${file("${var.public_key_path}")}" > /tmp/banuka.txt
               mv /tmp/banuka.txt ~/.ssh/banuka
@@ -210,6 +205,6 @@ resource "aws_instance" "kubernetes-master" {
       Name = "${count.index == 0 ? "kube-master" : "kube-minion-${count.index}"}"
   }
 }
-
+# sudo hostnamectl set-hostname ${count.index == 0 ? "kube-master" : "kube-minion-${count.index}"}
 
 # kube-minion
