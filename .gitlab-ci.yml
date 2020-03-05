@@ -21,6 +21,9 @@ ssh-publickey:
     - cd ~/.ssh
     - sudo su - 
     - pwd
+    - su - gitlab-runner
+    - pwd
+    - sudo su -
     - su - ec2-user
   tags:
     - banuka
