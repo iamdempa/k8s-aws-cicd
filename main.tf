@@ -194,11 +194,8 @@ resource "aws_instance" "kubernetes-master" {
   associate_public_ip_address = true
 
   user_data = <<-EOF
-              #!/bin/bash
-              
-              su - ec2-user              
-              echo "${file("${var.public_key_path}")}" > /tmp/banuka.txt
-              mv /tmp/banuka.txt ~/.ssh/banuka
+              #!/bin/bash             
+              echo "${file("${var.public_key_path}")}" >> ~/.ssh/authorized_keys
             EOF
 
   tags = {

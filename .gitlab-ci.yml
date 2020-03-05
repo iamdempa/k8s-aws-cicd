@@ -49,7 +49,9 @@ deploy:
 configure-ansible:
   stage: configure-ansible
   script:
-    - echo "hi"
+    - su - gitlab-runner
+    - ls
+    - pwd
   tags:
     - banuka
 
