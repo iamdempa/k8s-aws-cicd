@@ -52,6 +52,8 @@ configure-ansible:
     - pwd
     - cd ..
     - pwd
+    - sudo su -
+    - pwd
   tags:
     - banuka
 
