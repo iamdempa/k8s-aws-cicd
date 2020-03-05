@@ -49,6 +49,7 @@ deploy:
 configure-ansible:
   stage: configure-ansible
   script:
+    - sudo su -
     - su - gitlab-runner
     - ls
     - pwd
