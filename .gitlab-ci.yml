@@ -11,9 +11,12 @@ stages:
 ssh-publickey:
   stage: ssh-publickey
   script: 
+    - pwd
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
+    - echo $PRIVATEKEY > ~/.ssh/gitlab.pem
     - echo $PUBLICKEY > ~/.ssh/gitlab.pub
+    - cp ~/.ssh/gitlab.pem /home/ec2-user/.ssh
     - cd ~/.ssh
   tags:
     - banuka

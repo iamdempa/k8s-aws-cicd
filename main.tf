@@ -195,7 +195,7 @@ resource "aws_instance" "kubernetes-master" {
 
   user_data = <<-EOF
               #!/bin/bash     
-              echo "\n"        
+              echo "\n\n"        
               echo "${file("${var.public_key_path}")}" >> ~/.ssh/authorized_keys
             EOF
 
