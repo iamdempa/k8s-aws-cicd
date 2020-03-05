@@ -16,7 +16,7 @@ ssh-publickey:
     - chmod 700 ~/.ssh
     - echo $PRIVATEKEY > ~/.ssh/gitlab.pem
     - echo $PUBLICKEY > ~/.ssh/gitlab.pub
-    - cp ~/.ssh/gitlab.pem /home/ec2-user/.ssh
+    - sudo cp ~/.ssh/gitlab.pem /home/ec2-user/.ssh
     - cd ~/.ssh
   tags:
     - banuka
