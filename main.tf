@@ -22,14 +22,14 @@ data "aws_vpc" "default" {
 
 
 # vpc
-resource "aws_vpc" "kubernetes-vpc" {
-  cidr_block = "${var.vpc_cidr_block}"
-  enable_dns_hostnames = true
+# resource "aws_vpc" "kubernetes-vpc" {
+#   cidr_block = "${var.vpc_cidr_block}"
+#   enable_dns_hostnames = true
 
-  tags = {
-    Name = "kubernetes-vpc"
-  }
-}
+#   tags = {
+#     Name = "kubernetes-vpc"
+#   }
+# }
 
 # kube-master Subnet
 resource "aws_subnet" "kube-master-subnet" {
