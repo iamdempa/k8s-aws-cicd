@@ -12,10 +12,10 @@ ssh-publickey:
   stage: ssh-publickey
   script: 
     - pwd
-    - sudo mkdir -p ~/.ssh
-    - sudo chmod 700 ~/.ssh
-    - sudo echo $PRIVATEKEY > ~/.ssh/gitlab.pem
-    - sudo echo $PUBLICKEY > ~/.ssh/gitlab.pub
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo $PRIVATEKEY > ~/.ssh/gitlab.pem
+    - echo $PUBLICKEY > ~/.ssh/gitlab.pub
     - sudo cp ~/.ssh/gitlab.pem /home/ec2-user/.ssh/id_rsa
     - sudo cp ~/.ssh/gitlab.pub /home/ec2-user/.ssh/id_rsa.pub
     - cd ~/.ssh
@@ -63,7 +63,7 @@ destroy:
   stage: destroy
   script:
     - terraform init
-    - terraform destroy --auto-approve
+    # - terraform destroy --auto-approve
   tags:
     - banuka
 
