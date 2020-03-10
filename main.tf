@@ -16,9 +16,9 @@ terraform {
 }
 
 # default vpc
-data "aws_default_vpc" "default" {
-  
-}
+data "aws_vpc" "default" {
+  default = true
+} 
 
 
 # vpc
@@ -157,7 +157,7 @@ resource "aws_route_table" "kube-master-rt" {
 
 # route Table for kube-minion - commenting since SLIIT doesn't allow to create NGW and this uses it
 # resource "aws_route_table" "kube-minion-rt" {
-#   vpc_id = "${aws_vpc.kubernetes-vpc.id}"
+#   vpc_id = "${aws_vpc.id}"
 
 #   route {
 #     cidr_block = "0.0.0.0/0"
