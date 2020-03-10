@@ -16,26 +16,26 @@ terraform {
 }
 
 # default vpc
-data "aws_vpc" "kubernetes-vpc" {
-  tags = {
-    Name = "kubernetes-vpc"
-  }
-} 
-
-
-# vpc
-# resource "aws_vpc" "kubernetes-vpc" {
-#   cidr_block = "${var.vpc_cidr_block}"
-#   enable_dns_hostnames = true
-
+# data "aws_vpc" "kubernetes-vpc" {
 #   tags = {
 #     Name = "kubernetes-vpc"
 #   }
-# }
+# } 
+
+
+vpc
+resource "aws_vpc" "kubernetes-vpc" {
+  cidr_block = "${var.vpc_cidr_block}"
+  enable_dns_hostnames = true
+
+  tags = {
+    Name = "kubernetes-vpc"
+  }
+}
 
 # kube-master Subnet
 resource "aws_subnet" "kube-master-subnet" {
-  vpc_id = "${data.aws_vpc.kubernetes-vpc.id}"
+  vpc_id = "${aws_vpc.kubernetes-vpc.id}"
   cidr_block = "${var.kube-master_cidr}"
 
   tags = {
@@ -45,7 +45,7 @@ resource "aws_subnet" "kube-master-subnet" {
 
 # kube-minion Subnet
 resource "aws_subnet" "kube-minion-subnet" {
-  vpc_id = "${data.aws_vpc.kubernetes-vpc.id}"
+  vpc_id = "${aws_vpc.kubernetes-vpc.id}"
   cidr_block = "${var.kube-minion_cidr}"
 
   tags = {
@@ -57,7 +57,7 @@ resource "aws_subnet" "kube-minion-subnet" {
 resource "aws_security_group" "sg-kube-master-allow-ssh" {
   name = "kubernetes-master-sg"
   description = "sg to allow only ssh access to kube-master"
-  vpc_id = "${data.aws_vpc.kubernetes-vpc.id}"
+  vpc_id = "${aws_vpc.kubernetes-vpc.id}"
 
   # for ansible and kubernetes
   ingress {
@@ -91,7 +91,7 @@ resource "aws_security_group" "sg-kube-master-allow-ssh" {
 resource "aws_security_group" "sg-kube-minions-allow-ssh" {
   name = "kubernetes-minion-sg"
   description = "sg to not to allow any inbound traffic, only outbound traffic"
-  vpc_id = "${data.aws_vpc.kubernetes-vpc.id}"
+  vpc_id = "${aws_vpc.kubernetes-vpc.id}"
 
     # for ansible and kubernetes
   ingress {
@@ -119,7 +119,7 @@ resource "aws_security_group" "sg-kube-minions-allow-ssh" {
 
 # igw
 resource "aws_internet_gateway" "kubernetes-igw" {
-  vpc_id = "${data.aws_vpc.kubernetes-vpc.id}"
+  vpc_id = "${aws_vpc.kubernetes-vpc.id}"
 
   tags = {
     Name = "kubernetes-igw"
@@ -145,7 +145,7 @@ resource "aws_eip" "kubernetes_eip_for_ngw" {
 
 # route Table for kube-master
 resource "aws_route_table" "kube-master-rt" {
-  vpc_id = "${data.aws_vpc.kubernetes-vpc.id}"
+  vpc_id = "${aws_vpc.kubernetes-vpc.id}"
 
   route {
     cidr_block = "0.0.0.0/0"
