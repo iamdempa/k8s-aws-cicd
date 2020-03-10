@@ -3,6 +3,10 @@ stages:
   - prerequisites-install
   - install-terraform
   - configure-ansible
+  - deploy
+  
+  - destroy
+  
 
 ssh-publickey:
   stage: ssh-publickey
