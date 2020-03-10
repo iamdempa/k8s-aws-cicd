@@ -163,7 +163,6 @@ resource "aws_route_table" "kube-master-rt" {
 #   }
 # }
 
-
 # associate the kube-master subnet
 resource "aws_route_table_association" "kube-master-association" {
   subnet_id = "${aws_subnet.kube-master-subnet.id}"
@@ -175,7 +174,6 @@ resource "aws_route_table_association" "kube-master-association" {
 #   subnet_id = "${aws_subnet.kube-minion-subnet.id}"
 #   route_table_id = "${aws_route_table.kube-minion-rt.id}"
 # }
-
 
 # key-pair
 resource "aws_key_pair" "public" {
