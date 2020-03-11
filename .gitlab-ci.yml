@@ -7,7 +7,6 @@ stages:
   
   - destroy
   
-
 ssh-publickey:
   stage: ssh-publickey
   script: 
@@ -26,7 +25,6 @@ ssh-publickey:
   tags:
     - banuka
 
-    
 prerequisites-install:
   stage: prerequisites-install
   script:
