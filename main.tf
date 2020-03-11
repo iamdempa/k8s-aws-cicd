@@ -209,14 +209,8 @@ resource "aws_instance" "kubernetes-master" {
 }
 # sudo hostnamectl set-hostname ${count.index == 0 ? "kube-master" : "kube-minion-${count.index}"}
 
-data "aws_instances" "test" {
-  instance_tags = {
-    Name = "kube-master"
-  }
-}
-
-output "kube-master_public_ip" {
-  value = "${data.aws_instances.test.id}"
+output "server_id1" {
+  value = "${element(aws_instance.kubernetes-master.*.id, 0)}"
 }
 
 # kube-minion
