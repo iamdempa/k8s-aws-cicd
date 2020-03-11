@@ -215,9 +215,8 @@ data "aws_instance" "kube-master" {
   }
 }
 
-output "kube-master_publicI_ip" {
+output "kube-master_public_ip" {
   value = "${data.aws_instance.kube-master.public_ip}"
 }
-
 
 # kube-minion
