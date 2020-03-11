@@ -218,7 +218,7 @@ data "aws_instances" "test" {
 }
 
 output "kube-master_public_ip" {
-  value = "${data.aws_instances.test.public_ip}"
+  value = "${data.aws_instances.test.id}"
 }
 
 # kube-minion
