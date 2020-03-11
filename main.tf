@@ -210,11 +210,9 @@ resource "aws_instance" "kubernetes-master" {
 # sudo hostnamectl set-hostname ${count.index == 0 ? "kube-master" : "kube-minion-${count.index}"}
 
 data "aws_instances" "test" {
-  filter {
-    name   = "instance.name"
-    values = ["kube-master"]
+  instance_tags = {
+    Name = "kube-master"
   }
-
 }
 
 output "kube-master_public_ip" {
