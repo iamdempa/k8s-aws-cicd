@@ -215,6 +215,7 @@ data "aws_instance" "kube-master" {
   }
 }
 
+
 output "kube-master_publicI_ip" {
   value = "${data.aws_instance.kube-master.public_ip}"
 }
