@@ -210,7 +210,7 @@ resource "aws_instance" "kubernetes-master" {
 # sudo hostnamectl set-hostname ${count.index == 0 ? "kube-master" : "kube-minion-${count.index}"}
 
 output "id" {
-  value = "${element(concat(aws_instance.kubernetes-master.*.id), 2)}"
+  value = "${element(concat(aws_instance.kubernetes-master.*.id), 0)}"
 }
 
 # kube-minion
