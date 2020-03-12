@@ -206,7 +206,6 @@ resource "aws_instance" "kubernetes-master" {
       Name = "${count.index == 0 ? "kube-master" : "kube-minion-${count.index}"}"
   }
 }
-# sudo hostnamectl set-hostname ${count.index == 0 ? "kube-master" : "kube-minion-${count.index}"}
 
 data "aws_instance" "name" {
   filter {
