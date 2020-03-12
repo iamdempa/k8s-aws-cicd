@@ -17,9 +17,12 @@ ssh-publickey:
       #!/bin/bash
       pwd
       file="/.ssh/gitlab.pem"
-      if [ ! -f "$file" ]
+      if [ ! -f $file ]
       then
+        cd .ssh
+        ls
         echo "file not found"
+        exit 1
       else
         sudo chmod 700 ~/.ssh/gitlab.pem
       fi
