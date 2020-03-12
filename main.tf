@@ -227,7 +227,7 @@ output "subnet_ids" {
 } 
 # kube-minion
 
-resource "null_resource" "ansible_inventory" {
+resource "null_resource" "path" {
   provisioner "local-exec" {
     command = "pwd"
   }
