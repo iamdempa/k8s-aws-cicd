@@ -212,6 +212,10 @@ data "aws_instance" "name" {
     name   = "tag:Name"
     values = ["kube-master"]
   }
+
+  depends_on = [
+    "${aws_instance.kubernetes-master}",
+  ]
 }
 
 
