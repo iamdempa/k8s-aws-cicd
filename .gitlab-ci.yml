@@ -25,6 +25,7 @@ ssh-publickey:
       FILE=$PWD/gitlab.pem
       if [ -f "$FILE" ]; then
         echo "$FILE exist"
+        chmod 700 $FILE
       else 
         echo "$FILE does not exist"
       fi
