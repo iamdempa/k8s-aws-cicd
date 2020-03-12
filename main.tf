@@ -223,6 +223,6 @@ resource "aws_instance" "kubernetes_master" {
 
 
 output "subnet_ids" {
-    value = ["${aws_instance.kubernetes_master.*.id}"]
+    value = ["${aws_instance.kubernetes_master.*.public_ip}"]
 } 
 # kube-minion
