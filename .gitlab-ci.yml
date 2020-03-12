@@ -15,6 +15,7 @@ ssh-publickey:
     - chmod 700 ~/.ssh
     - |
       #!/bin/bash
+      echo "$USER"
       pwd
       cd 
       pwd
