@@ -16,6 +16,8 @@ ssh-publickey:
     - |
       #!/bin/bash
       pwd
+      cd 
+      pwd
       file="/.ssh/gitlab.pem"
       if [ ! -f $file ]
       then
