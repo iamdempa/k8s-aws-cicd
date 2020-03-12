@@ -219,7 +219,7 @@ data "aws_instance" "name" {
 
 output "id" {
   # value = "${element(aws_instance.kubernetes-master.*.id, 0)}"
-  value = "${data.aws_instance.name.id}"
+  value = "${data.aws_instance.name.public_ip}"
 }
 
 # kube-minion
