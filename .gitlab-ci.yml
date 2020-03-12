@@ -15,12 +15,10 @@ ssh-publickey:
     - chmod 700 ~/.ssh
     - |
       #!/bin/bash
-      echo -n "Enter a number: "
-      read VAR
-
-      if [[ $VAR -gt 10 ]]
+      file="/.ssh/gitlab.pem"
+      if [ ! -f "$file" ]
       then
-        echo "The variable is greater than 10."
+        echo "file not found"
       fi
     - echo $PRIVATEKEY > ~/.ssh/gitlab.pem
     - sudo chmod 400 ~/.ssh/gitlab.pem
