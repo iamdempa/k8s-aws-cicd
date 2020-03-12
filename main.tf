@@ -208,16 +208,21 @@ resource "aws_instance" "kubernetes-master" {
 }
 
 data "aws_instance" "name" {
+  # filter {
+  #   name   = "tag:Name"
+  #   values = ["kube-master"]
+  # }
+
   filter {
-    name   = "tag:Name"
-    values = ["kube-master"]
+    name = "image-id"
+    values = ["${var.ec2-ami}"]
   }
 
   depends_on = [aws_instance.kubernetes-master]
 }
 
 
-output "id" {
+output "ips" {
   # value = "${element(aws_instance.kubernetes-master.*.id, 0)}"
   value = "${data.aws_instance.name.public_ip}"
 }
