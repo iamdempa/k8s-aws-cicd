@@ -227,16 +227,9 @@ output "ips" {
 } 
 # kube-minion
 
-resource "null_resource" "pa" {
+resource "null_resource" "path" {
 
   provisioner "local-exec" {
-    command = "pwd"
-  }
-  provisioner "local-exec" {
-    command = "echo machan >> ok.txt"
-  }
-
-  provisioner "local-exec" {
-    command = "pwd"
+    command = "mkdir test"
   }
 }
