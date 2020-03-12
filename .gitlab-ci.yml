@@ -13,7 +13,7 @@ ssh-publickey:
     - pwd
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    - >
+    - |
       #!/bin/bash
       echo -n "Enter a number: "
       read VAR
