@@ -15,7 +15,6 @@ ssh-publickey:
     - chmod 700 ~/.ssh
     - |
       #!/bin/bash
-      cd
       cd ~/.ssh
       pwd
       FILE1="$PWD/gitlab.pem"
