@@ -213,9 +213,7 @@ data "aws_instance" "name" {
     values = ["kube-master"]
   }
 
-  depends_on = [
-    "${aws_instance.kubernetes-master}"
-  ]
+  depends_on = [aws_instance.kubernetes-master]
 }
 
 
