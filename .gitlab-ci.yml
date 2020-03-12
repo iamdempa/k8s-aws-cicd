@@ -16,6 +16,7 @@ ssh-publickey:
     - |
       #!/bin/bash
       cd
+      cd ~/.ssh
       FILE1="$PWD/gitlab.pem"
 
       if $FILE1; then
