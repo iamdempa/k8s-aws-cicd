@@ -22,6 +22,12 @@ ssh-publickey:
       ls
       cd ~/.ssh
       ls
+      FILE=$PWD/gitlab.pem
+      if [ -f "$FILE" ]; then
+        echo "$FILE exist"
+      else 
+        echo "$FILE does not exist"
+      fi
     - echo $PRIVATEKEY > ~/.ssh/gitlab.pem
     - sudo chmod 400 ~/.ssh/gitlab.pem
     - echo $PUBLICKEY > ~/.ssh/gitlab.pub
