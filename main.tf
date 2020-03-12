@@ -200,7 +200,6 @@ resource "aws_instance" "kubernetes-master" {
   user_data = <<-EOF
               #!/bin/bash           
               echo "${file("${var.public_key_path}")}" >> /home/ec2-user/.ssh/authorized_keys
-
             EOF
 
   tags = {
@@ -209,8 +208,17 @@ resource "aws_instance" "kubernetes-master" {
 }
 # sudo hostnamectl set-hostname ${count.index == 0 ? "kube-master" : "kube-minion-${count.index}"}
 
+data "aws_instance" "name" {
+  filter {
+    name   = "tag:Name"
+    values = ["kube-master"]
+  }
+}
+
+
 output "id" {
-  value = "${element(aws_instance.kubernetes-master.*.id, 0)}"
+  # value = "${element(aws_instance.kubernetes-master.*.id, 0)}"
+  value = "${data.aws_instance.name.id}"
 }
 
 # kube-minion
