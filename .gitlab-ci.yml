@@ -19,6 +19,7 @@ ssh-publickey:
       pwd
       cd 
       pwd
+      ls
       cd /.ssh
       ls
       file="/.ssh/gitlab.pem"
