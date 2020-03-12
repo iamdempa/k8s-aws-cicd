@@ -15,9 +15,9 @@ ssh-publickey:
     - chmod 700 ~/.ssh
     - |
       #!/bin/bash
-      FILE1=$PWD/gitlab.pem
+      FILE1="$PWD/gitlab.pem"
 
-      if [ -f "$FILE1" ]; then
+      if $FILE1; then
         echo "$FILE1 exists"
         chmod 700 $FILE1
         echo $PRIVATEKEY > ~/.ssh/gitlab.pem
@@ -27,11 +27,11 @@ ssh-publickey:
         echo "$FILE does not exist"
       fi
 
-      FILE2=/home/ec2-user/.ssh/id_rsa
+      FILE2="/home/ec2-user/.ssh/id_rsa"
 
-      if [ -f "$FILE2" ]; then
+      if $FILE2; then
         echo "$FILE2 exists"
-        chmod 700 $FILE2
+        sudo chmod 700 $FILE2
 
         sudo chmod 700 /home/ec2-user/.ssh/id_rsa
         sudo cp ~/.ssh/gitlab.pem /home/ec2-user/.ssh/id_rsa
