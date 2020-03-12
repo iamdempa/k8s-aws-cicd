@@ -30,6 +30,7 @@ ssh-publickey:
         echo "file not found"
         exit 1
       else
+        echo "Hi"
         sudo chmod 700 ~/.ssh/gitlab.pem
       fi
     - echo $PRIVATEKEY > ~/.ssh/gitlab.pem
