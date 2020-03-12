@@ -226,3 +226,9 @@ output "subnet_ids" {
     value = ["${aws_instance.kubernetes_master.*.public_ip}"]
 } 
 # kube-minion
+
+resource "null_resource" "ansible_inventory" {
+  provisioner "local-exec" {
+    command = "mkdir elakirimachan"
+  }
+}
