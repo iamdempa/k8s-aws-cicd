@@ -207,19 +207,19 @@ resource "aws_instance" "kubernetes_master" {
   }
 }
 
-data "aws_instance" "name" {
-  # filter {
-  #   name   = "tag:Name"
-  #   values = ["kube-master"]
-  # }
+# data "aws_instance" "name" {
+#   # filter {
+#   #   name   = "tag:Name"
+#   #   values = ["kube-master"]
+#   # }
 
-  filter {
-    name = "image-id"
-    values = ["${var.ec2-ami}"]
-  }
+#   filter {
+#     name = "image-id"
+#     values = ["${var.ec2-ami}"]
+#   }
 
-  depends_on = [aws_instance.kubernetes_master]
-}
+#   depends_on = [aws_instance.kubernetes_master]
+# }
 
 
 output "subnet_ids" {
