@@ -227,8 +227,16 @@ output "subnet_ids" {
 } 
 # kube-minion
 
-resource "null_resource" "path2" {
+resource "null_resource" "path3" {
+
+  provisioner "local-exec" {
+    command = "pwd"
+  }
   provisioner "local-exec" {
     command = "echo ${aws_instance.kubernetes_master.0.public_ip} >> private_ips.txt"
+  }
+
+  provisioner "local-exec" {
+    command = "pwd"
   }
 }
