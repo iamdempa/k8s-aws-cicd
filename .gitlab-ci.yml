@@ -15,27 +15,30 @@ ssh-publickey:
     - chmod 700 ~/.ssh
     - |
       #!/bin/bash
-      echo "$USER"
-      pwd
-      cd 
-      pwd
-      ls
-      cd ~/.ssh
-      ls
-      FILE=$PWD/gitlab.pem
-      if [ -f "$FILE" ]; then
-        echo "$FILE exist"
-        chmod 700 $FILE
+      FILE1=$PWD/gitlab.pem
+
+      if [ -f "$FILE1" ]; then
+        echo "$FILE exists"
+        chmod 700 $FILE1
+        echo $PRIVATEKEY > ~/.ssh/gitlab.pem
+        sudo chmod 400 ~/.ssh/gitlab.pem
+        echo $PUBLICKEY > ~/.ssh/gitlab.pub
       else 
         echo "$FILE does not exist"
       fi
-    - echo $PRIVATEKEY > ~/.ssh/gitlab.pem
-    - sudo chmod 400 ~/.ssh/gitlab.pem
-    - echo $PUBLICKEY > ~/.ssh/gitlab.pub
 
-    - sudo chmod 700 /home/ec2-user/.ssh/id_rsa
-    - sudo cp ~/.ssh/gitlab.pem /home/ec2-user/.ssh/id_rsa
-    - sudo chmod 400 /home/ec2-user/.ssh/id_rsa
+      FILE2=/home/ec2-user/.ssh/id_rsa
+
+      if [ -f "$FILE" ]; then
+        echo "$FILE exists"
+        chmod 700 $FILE2
+
+        sudo chmod 700 /home/ec2-user/.ssh/id_rsa
+        sudo cp ~/.ssh/gitlab.pem /home/ec2-user/.ssh/id_rsa
+        sudo chmod 400 /home/ec2-user/.ssh/id_rsa
+      else 
+        echo "$FILE does not exist"
+      fi
     - sudo cp ~/.ssh/gitlab.pub /home/ec2-user/.ssh/id_rsa.pub
     - cd ~/.ssh
     - sudo cd /home/ec2-user/
