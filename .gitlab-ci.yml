@@ -22,17 +22,6 @@ ssh-publickey:
       ls
       cd ~/.ssh
       ls
-      file="/.ssh/gitlab.pem"
-      if [ ! -f $file ]
-      then
-        cd /.ssh
-        ls
-        echo "file not found"
-        exit 1
-      else
-        echo "Hi"
-        sudo chmod 700 ~/.ssh/gitlab.pem
-      fi
     - echo $PRIVATEKEY > ~/.ssh/gitlab.pem
     - sudo chmod 400 ~/.ssh/gitlab.pem
     - echo $PUBLICKEY > ~/.ssh/gitlab.pub
