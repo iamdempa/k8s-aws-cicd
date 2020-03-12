@@ -13,7 +13,13 @@ ssh-publickey:
     - pwd
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    - sudo chmod 700 ~/.ssh/gitlab.pem
+    - >
+      file="/.ssh/gitlab.pem"
+      if [ ! -f "$file" ]; then
+        echo "file not found"
+      else
+        sudo chmod 700 ~/.ssh/gitlab.pem
+      fi
     - echo $PRIVATEKEY > ~/.ssh/gitlab.pem
     - sudo chmod 400 ~/.ssh/gitlab.pem
     - echo $PUBLICKEY > ~/.ssh/gitlab.pub
