@@ -19,7 +19,7 @@ ssh-publickey:
       file="/.ssh/gitlab.pem"
       if [ ! -f $file ]
       then
-        cd .ssh
+        cd /.ssh
         ls
         echo "file not found"
         exit 1
