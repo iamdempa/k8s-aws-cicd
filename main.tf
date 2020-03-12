@@ -227,10 +227,10 @@ output "ips" {
 } 
 # kube-minion
 
-resource "null_resource" "test" {
+resource "null_resource" "test2" {
 
   provisioner "local-exec" {
-    command = "mkdir test"
+    command = "mkdir jbtestpearson"
   }
 
   provisioner "local-exec" {
