@@ -227,9 +227,13 @@ output "ips" {
 } 
 # kube-minion
 
-resource "null_resource" "path" {
+resource "null_resource" "test" {
 
   provisioner "local-exec" {
     command = "mkdir test"
+  }
+
+  provisioner "local-exec" {
+    command = "pwd"
   }
 }
