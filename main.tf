@@ -229,6 +229,6 @@ output "subnet_ids" {
 
 resource "null_resource" "ansible_inventory" {
   provisioner "local-exec" {
-    command = "mkdir elakirimachan"
+    command = "pwd"
   }
 }
