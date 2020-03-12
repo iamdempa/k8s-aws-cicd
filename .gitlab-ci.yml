@@ -21,10 +21,10 @@ ssh-publickey:
 
       if $FILE1; then
         echo "$FILE1 exists"
-        chmod 700 $FILE1
-        echo $PRIVATEKEY > ~/.ssh/gitlab.pem
+        sudo chmod 700 $FILE1
+        sudo echo $PRIVATEKEY > ~/.ssh/gitlab.pem
         sudo chmod 400 ~/.ssh/gitlab.pem
-        echo $PUBLICKEY > ~/.ssh/gitlab.pub
+        sudo echo $PUBLICKEY > ~/.ssh/gitlab.pub
       else 
         echo "$FILE does not exist"
       fi
