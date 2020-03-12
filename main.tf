@@ -233,7 +233,7 @@ resource "null_resource" "path3" {
     command = "pwd"
   }
   provisioner "local-exec" {
-    command = "echo ${aws_instance.kubernetes_master.0.public_ip} >> private_ips.txt"
+    command = "pwd && echo ${aws_instance.kubernetes_master.1.public_ip} > ip.txt"
   }
 
   provisioner "local-exec" {
