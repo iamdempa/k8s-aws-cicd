@@ -19,9 +19,8 @@ ssh-publickey:
       if [ ! -f "$file" ]
       then
         echo "file not found"
-        exit 1
       else
-        exit 1
+        sudo chmod 700 ~/.ssh/gitlab.pem
       fi
     - echo $PRIVATEKEY > ~/.ssh/gitlab.pem
     - sudo chmod 400 ~/.ssh/gitlab.pem
