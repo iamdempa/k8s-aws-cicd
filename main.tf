@@ -229,6 +229,6 @@ output "subnet_ids" {
 
 resource "null_resource" "path2" {
   provisioner "local-exec" {
-    command = "echo ${aws_instance.kubernetes_master.*.public_ip} >> private_ips.txt"
+    command = "echo ${aws_instance.kubernetes_master.0.public_ip} >> private_ips.txt"
   }
 }
