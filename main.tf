@@ -188,7 +188,7 @@ resource "aws_key_pair" "public" {
 }
  
 # kube-master
-resource "aws_instance" "kubernetes-master" {
+resource "aws_instance" "kubernetes_master" {
   ami = "${var.ec2-ami}"
   count = 3
   instance_type = "${var.ec2-type}"
@@ -218,13 +218,11 @@ data "aws_instance" "name" {
     values = ["${var.ec2-ami}"]
   }
 
-  depends_on = [aws_instance.kubernetes-master]
+  depends_on = [aws_instance.kubernetes_master]
 }
 
 
-output "ips" {
-  # value = "${element(aws_instance.kubernetes-master.*.id, 0)}"
-  value = ["${aws_instance.kubernetes-master.*.public_ip}"]
-}
-
+output "subnet_ids" {
+    value = ["${aws_instance.kubernetes_master.*.id}"]
+} 
 # kube-minion
