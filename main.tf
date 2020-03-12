@@ -222,18 +222,18 @@ resource "aws_instance" "kubernetes_master" {
 # }
 
 
-output "subnet_ids" {
-    value = ["${aws_instance.kubernetes_master.1.public_ip}"]
+output "ips" {
+    value = ["${aws_instance.kubernetes_master.*.public_ip}"]
 } 
 # kube-minion
 
-resource "null_resource" "path3" {
+resource "null_resource" "pa" {
 
   provisioner "local-exec" {
     command = "pwd"
   }
   provisioner "local-exec" {
-    command = "pwd && echo ${aws_instance.kubernetes_master.1.public_ip} > ip.txt"
+    command = "echo machan >> ok.txt"
   }
 
   provisioner "local-exec" {
