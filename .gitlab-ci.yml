@@ -15,6 +15,7 @@ ssh-publickey:
     - chmod 700 ~/.ssh
     - |
       #!/bin/bash
+      cd
       FILE1="$PWD/gitlab.pem"
 
       if $FILE1; then
