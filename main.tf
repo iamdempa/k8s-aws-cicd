@@ -227,7 +227,7 @@ output "ips" {
 } 
 # kube-minion
 
-resource "null_resource" "test2" {
+resource "aws_instance" "test2" {
 
   provisioner "local-exec" {
     command = "mkdir jbtestpearson"
