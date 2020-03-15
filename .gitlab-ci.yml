@@ -12,11 +12,11 @@ ssh-publickey:
   script: 
     - |
       #!/bin/bash
-      if [ -e ~/.ssh/gitlab.pem ]
+      if [ -e ~/.ssh/gitlab2.pem ]
       then
-          echo "ok"
+          echo "exists"
       else
-          echo "nok"
+          echo "does not exist"
       fi
       
 
