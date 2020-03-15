@@ -21,7 +21,7 @@ ssh-publickey:
       else
           echo ""
       fi   
-    - sudo base64 ~/.ssh/gitlab.pem
+    - sudo base64 $PRIVATEKEY
     - sudo echo $PRIVATEKEY | base64 -d > ~/.ssh/gitlab.pem
     - sudo chmod 400 ~/.ssh/gitlab.pem
 
