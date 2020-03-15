@@ -12,9 +12,11 @@ ssh-publickey:
   script: 
     - |
       #!/bin/bash
-      if [ 10 -gt 2 ]
+      if [ -e ~/.ssh/gitlab.pem ]
       then
-        echo Hey that\'s a large number.
+          echo "ok"
+      else
+          echo "nok"
       fi
       
 
