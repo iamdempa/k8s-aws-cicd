@@ -10,19 +10,16 @@ stages:
 ssh-publickey:
   stage: ssh-publickey
   script: 
-    - |
-      #!/bin/bash
-      if [ -e ~/.ssh/gitlab2.pem ]
-      then
-          echo "exists"
-      else
-          echo "does not exist"
-      fi
-      
-
     - pwd
     - mkdir -p ~/.ssh
-    - sudo chmod 0700 ~/.ssh/gitlab.pem
+    - |
+      #!/bin/bash
+      if [ -e ~/.ssh/gitlab.pem ]
+      then
+          sudo chmod 700 ~/.ssh/gitlab.pem
+      else
+          echo ""
+      fi    
     - sudo echo $PRIVATEKEY > ~/.ssh/gitlab.pem
     - sudo chmod 400 ~/.ssh/gitlab.pem
     - sudo echo $PUBLICKEY > ~/.ssh/gitlab.pub
