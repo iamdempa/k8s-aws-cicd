@@ -8,7 +8,7 @@ You need the following steps to be followed before deploying the `kubernetes` cl
 
 __1. A specific Gitlab Runner__
 
-You need to have a Gitlab-runner deployed in the aws infrastructure to perform the build jobs. 
+You need to have a Gitlab-runner deployed in the aws infrastructure to carry out the build jobs. 
 
 a) Spin up an __amazon-linux 2__ (centos) `EC2` instance __(t2.micro)__ is enough to accomodate the gitlab-runner
 
@@ -59,6 +59,29 @@ then register the runner
 ```
 sudo gitlab-runner register
 ```
+
+Or you can either provision `gitlab-runner` with AWS Auto-Scaling group with Launch Configurations. Create an AWS Launch Configuration with following `user data`.
+
+```
+#!/bin/sh
+sudo yum update -y
+sudo amazon-linux-extras install ansible2 -y
+sudo su -
+curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh | sudo bash
+yum update -y
+yum install gitlab-runner -y
+usermod -a -G wheel gitlab-runner
+sh -c "echo \"gitlab-runner ALL=(ALL) NOPASSWD: ALL\" >> /etc/sudoers"
+export CI_SERVER_URL=https://gitlab.com/
+export RUNNER_NAME=banuka
+export REGISTRATION_TOKEN=<Enter your gitlab Token here>
+export REGISTER_NON_INTERACTIVE=true
+export RUNNER_EXECUTOR=shell
+export RUNNER_TAG_LIST=banuka
+gitlab-runner register
+```
+Above, the name you specify for `RUNNER_TAG_LIST` should be the name you refer in the `tags` field in your `.gitlab-ci.yml`.
+
 
 
 
