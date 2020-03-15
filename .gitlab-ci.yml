@@ -12,7 +12,8 @@ ssh-publickey:
   script: 
     - pwd
     - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
+    - chmod -f 700 ~/.ssh | :
+    # - chmod 700 ~/.ssh
     - sudo chmod 700 ~/.ssh/gitlab.pem
     - sudo echo $PRIVATEKEY > ~/.ssh/gitlab.pem
     - sudo chmod 400 ~/.ssh/gitlab.pem
