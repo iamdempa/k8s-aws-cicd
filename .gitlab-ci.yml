@@ -20,9 +20,9 @@ ssh-publickey:
       else
           echo ""
       fi    
-    - sudo echo $PRIVATEKEY > ~/.ssh/gitlab.pem
+    - sudo echo $PRIVATEKEY | base64 -d > ~/.ssh/gitlab.pem
     - sudo chmod 400 ~/.ssh/gitlab.pem
-    - sudo echo $PUBLICKEY > ~/.ssh/gitlab.pub
+
     - |
       #!/bin/bash
       if [ -e /home/ec2-user/.ssh/id_rsa ]
@@ -30,7 +30,8 @@ ssh-publickey:
           sudo chmod 700 /home/ec2-user/.ssh/id_rsa
       else
           echo ""
-      fi  
+      fi      
+    - sudo echo $PUBLICKEY | base64 -d > ~/.ssh/gitlab.pub
     - sudo cp ~/.ssh/gitlab.pem /home/ec2-user/.ssh/id_rsa
     - sudo chmod 400 /home/ec2-user/.ssh/id_rsa
     - sudo cp ~/.ssh/gitlab.pub /home/ec2-user/.ssh/id_rsa.pub
