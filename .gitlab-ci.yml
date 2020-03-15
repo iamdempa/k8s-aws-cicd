@@ -14,12 +14,11 @@ ssh-publickey:
     - mkdir -p ~/.ssh
     - |
       if [ -d ~/.ssh/gitlab.pem ] ; then chmod 0700 ~/.ssh/gitlab.pem ; fi
-    # - chmod 700 ~/.ssh
-    # - sudo chmod 700 ~/.ssh/gitlab.pem
     - sudo echo $PRIVATEKEY > ~/.ssh/gitlab.pem
     - sudo chmod 400 ~/.ssh/gitlab.pem
     - sudo echo $PUBLICKEY > ~/.ssh/gitlab.pub
-    # - sudo chmod 700 /home/ec2-user/.ssh/id_rsa
+    - |
+      if [ -d /home/ec2-user/.ssh/id_rsa ] ; then chmod 0700 /home/ec2-user/.ssh/id_rsa ; fi
     - sudo cp ~/.ssh/gitlab.pem /home/ec2-user/.ssh/id_rsa
     - sudo chmod 400 /home/ec2-user/.ssh/id_rsa
     - sudo cp ~/.ssh/gitlab.pub /home/ec2-user/.ssh/id_rsa.pub
