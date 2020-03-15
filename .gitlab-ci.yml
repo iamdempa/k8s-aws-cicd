@@ -13,8 +13,8 @@ ssh-publickey:
     - pwd
     - mkdir -p ~/.ssh
     - |
-      if [ -d ~/.ssh/gitlab.pem ] 
-      then echo "hi" 
+      if [ -d ~/.ssh/gitlab.pem ] ;
+      then echo "hi" ;
       fi
     - sudo echo $PRIVATEKEY > ~/.ssh/gitlab.pem
     - sudo chmod 400 ~/.ssh/gitlab.pem
