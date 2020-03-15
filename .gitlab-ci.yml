@@ -11,12 +11,12 @@ ssh-publickey:
   stage: ssh-publickey
   script: 
     - |
-      #!/bin/bash <<EOD
+      #!/bin/bash
       if [ 1 -gt 100 ]
       then
         echo Hey that\'s a large number.
       fi
-      EOD
+      
 
     - pwd
     - mkdir -p ~/.ssh
