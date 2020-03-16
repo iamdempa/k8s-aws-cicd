@@ -12,10 +12,11 @@ ssh-publickey:
   script: 
     - pwd
     - mkdir -p ~/.ssh
-    # - chmod 700 ~/.ssh
+    - chmod 700 ~/.ssh/gitlab.pem
     - echo $PRIVATEKEY > ~/.ssh/gitlab.pem
-    # - sudo chmod 400 ~/.ssh/gitlab.pem
+    - sudo chmod 400 ~/.ssh/gitlab.pem
     - echo $PUBLICKEY > ~/.ssh/gitlab.pub
+    
     - sudo cp ~/.ssh/gitlab.pem /home/ec2-user/.ssh/id_rsa
     - sudo chmod 400 /home/ec2-user/.ssh/id_rsa
     - sudo cp ~/.ssh/gitlab.pub /home/ec2-user/.ssh/id_rsa.pub
