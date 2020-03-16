@@ -13,9 +13,9 @@ ssh-publickey:
     - pwd
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh/gitlab.pem
-    - echo $PRIVATEKEY > ~/.ssh/gitlab.pem
+    - echo $PRIVATEKEYNEW > ~/.ssh/gitlabnew.pem
     - sudo chmod 400 ~/.ssh/gitlab.pem
-    - sudo echo $PUBLICKEY > ~/.ssh/gitlab.pub
+    - sudo echo $PUBLICKEYNEW > ~/.ssh/gitlabnew.pub
     - pwd
     - sudo cp ~/.ssh/gitlab.pem /home/ec2-user/.ssh/id_rsa
     - sudo chmod 400 /home/ec2-user/.ssh/id_rsa
