@@ -183,7 +183,7 @@ resource "aws_route_table_association" "kube-master-association" {
 
 # key-pair
 resource "aws_key_pair" "public" {
-  key_name = "gitlab"
+  key_name = "gitlabnew"
   public_key = "${file("${var.public_key_path}")}"
 }
  
