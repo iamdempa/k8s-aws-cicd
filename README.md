@@ -80,7 +80,7 @@ export RUNNER_EXECUTOR=shell
 export RUNNER_TAG_LIST=banuka
 gitlab-runner register
 ```
-Above, the name you specify for `RUNNER_TAG_LIST` should be the name you refer in the `tags` field in your `.gitlab-ci.yml`.
+Above, the value you specify for `RUNNER_TAG_LIST` should be the name you refer in the `tags` field in your `.gitlab-ci.yml`. And provide the `REGISTRATION_TOKEN` as well. You can find this token under the __Settings__ of your repo.
 
 
 

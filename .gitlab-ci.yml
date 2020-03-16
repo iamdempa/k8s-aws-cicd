@@ -23,7 +23,6 @@ ssh-publickey:
       fi   
     # try this
     - echo "$PRIVATEKEY" | tr -d '\r' >  ~/.ssh/gitlab.pem
-
     # - sudo echo $PRIVATEKEY  > ~/.ssh/gitlab.pem
     - sudo chmod 400 ~/.ssh/gitlab.pem
     - |
