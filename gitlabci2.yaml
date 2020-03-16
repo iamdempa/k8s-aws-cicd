@@ -12,17 +12,44 @@ ssh-publickey:
   script: 
     - pwd
     - mkdir -p ~/.ssh
-    # - chmod 700 ~/.ssh
-    - echo $PRIVATEKEY > ~/.ssh/gitlab.pem
-    # - sudo chmod 400 ~/.ssh/gitlab.pem
-    - echo $PUBLICKEY > ~/.ssh/gitlab.pub
-    - sudo cp ~/.ssh/gitlab.pem /home/ec2-user/.ssh/id_rsa
-    - sudo chmod 400 /home/ec2-user/.ssh/id_rsa
-    - sudo cp ~/.ssh/gitlab.pub /home/ec2-user/.ssh/id_rsa.pub
+    - chmod 700 ~/.ssh
+    - |
+      #!/bin/bash
+      cd ~/.ssh
+      pwd
+      FILE1="$PWD/gitlab.pem"
+
+      if $FILE1; then
+        echo "$FILE1 exists"
+        sudo chmod 700 ./gitlab.pem
+        ls -al
+        sudo echo $PRIVATEKEY > ~/.ssh/gitlab.pem
+        sudo chmod 400 ~/.ssh/gitlab.pem
+        sudo echo $PUBLICKEY > ~/.ssh/gitlab.pub
+      else 
+        echo "$FILE does not exist"
+      fi
+
+      FILE2="/home/ec2-user/.ssh/id_rsa"
+
+      if $FILE2; then
+        echo "$FILE2 exists"
+        sudo chmod 700 $FILE2
+
+        sudo chmod 700 /home/ec2-user/.ssh/id_rsa
+        sudo cp ~/.ssh/gitlab.pem /home/ec2-user/.ssh/id_rsa
+        sudo chmod 400 /home/ec2-user/.ssh/id_rsa
+        sudo cp ~/.ssh/gitlab.pub /home/ec2-user/.ssh/id_rsa.pub
+      else 
+        echo "$FILE does not exist"
+      fi
+
+
+    - cd ~/.ssh
+    - sudo cd /home/ec2-user/
+    - pwd
   tags:
     - banuka
-
-
 
 prerequisites-install:
   stage: prerequisites-install
