@@ -117,7 +117,7 @@ resource "aws_instance" "kubernetes_master" {
 
   user_data = <<-EOF
               #!/bin/bash           
-              echo "${file("${var.public_key_path}")}" >> /home/ec2-user/.ssh/authorized_keys
+              echo "${file("${var.public_key_path}")}" > /home/ec2-user/.ssh/authorized_keys
               pwd
             EOF
 
