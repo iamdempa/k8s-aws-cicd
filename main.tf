@@ -121,18 +121,18 @@ resource "aws_security_group" "sg-kube-minions-allow-ssh" {
 
 
 # igw
-resource "aws_internet_gateway" "kubernetes-igw" {
-  vpc_id = "${data.aws_vpc.default.id}"
+# resource "aws_internet_gateway" "kubernetes-igw" {
+#   vpc_id = "${data.aws_vpc.default.id}"
 
-  tags = {
-    Name = "kubernetes-igw"
-  }
-}
+#   tags = {
+#     Name = "kubernetes-igw"
+#   }
+# }
 
-# eip for nat gateway
-resource "aws_eip" "kubernetes_eip_for_ngw" {
-  vpc = true
-}
+# # eip for nat gateway
+# resource "aws_eip" "kubernetes_eip_for_ngw" {
+#   vpc = true
+# }
 
 
 # ngw - commenting since SLIIT doesn't allow this

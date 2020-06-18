@@ -36,12 +36,12 @@ variable "vpc_cidr_block" {
 
 variable "kube-master_cidr" {
   type = "string"
-  default = "172.31.0.0/22"
+  default = "172.31.96.0/20"
   # default = "172.31.0.0/19"
 }
 
 variable "kube-minion_cidr" {
   type = "string"
-  default = "172.31.4.0/22"
+  default = "172.31.112.0/20"
   # default = "172.31.32.0/19"
 }
