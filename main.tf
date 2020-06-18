@@ -118,17 +118,44 @@ resource "aws_instance" "kubernetes_master" {
   user_data = <<-EOF
               #!/bin/bash           
               echo "${file("${var.public_key_path}")}" > /home/ec2-user/.ssh/authorized_keys
+              echo "${file("${var.private_key_path}")}" > /home/ec2-user/.ssh/gitlabnew.pem
               pwd
             EOF
 
   tags = {
-      Name = "${count.index == 0 ? "kube-master" : "kube-minion-${count.index}"}"
+      # Name = "${count.index == 0 ? "kube-master" : "kube-minion-${count.index}"}"
+      Name = "kube-master"
+  }
+}
+
+resource "aws_instance" "kubernetes_minion" {
+  ami = "${var.ec2-ami}"
+  count = 2
+  instance_type = "${var.ec2-type}"
+  key_name = "${aws_key_pair.public.key_name}"
+  subnet_id = "${aws_subnet.kube-master-subnet.id}"
+  vpc_security_group_ids = ["${aws_security_group.sg-kube-master-allow-ssh.id}"]
+  associate_public_ip_address = true
+
+  user_data = <<-EOF
+              #!/bin/bash           
+              echo "${file("${var.public_key_path}")}" > /home/ec2-user/.ssh/authorized_keys              
+              pwd
+            EOF
+
+  tags = {
+      Name = "kube-minion-${count.index}"}"
   }
 }
 
 
-output "ips" {
+output "master-ip" {
     value = ["${aws_instance.kubernetes_master.*.public_ip}"]
+} 
+
+
+output "minion-ips" {
+    value = ["${aws_instance.kubernetes_minion.*.public_ip}"]
 } 
 
 
