@@ -15,10 +15,7 @@ ssh-publickey:
     # - chmod 700 ~/.ssh/gitlab.pem
 
     - echo "$PRIVATEKEYNEW"
-    - echo "$PRIVATEKEYNEW" | base64 -d
-    - echo -n "$PRIVATEKEYNEW" | ssh-add - > ~/.ssh/gitlabnew.pem
-    - echo -n "$PRIVATEKEYNEW" | ssh-add - > ~/.ssh/damn.pem
-    - ssh-add <(echo "$PRIVATEKEYNEW" | base64 --decode)
+    - echo "$PRIVATEKEYNEW" | base64 -d > gitlabnew.pem
     # - echo $PRIVATEKEYNEW > ~/.ssh/gitlabnew.pem
     # - sudo chmod 400 ~/.ssh/gitlab.pem
     - sudo echo $PUBLICKEYNEW > ~/.ssh/gitlabnew.pub
