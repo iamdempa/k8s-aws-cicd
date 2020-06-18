@@ -13,6 +13,7 @@ ssh-publickey:
     - pwd
     - mkdir -p ~/.ssh
     # - chmod 700 ~/.ssh/gitlab.pem
+    - eval `ssh-agent -s`
     - ssh-add <(echo "$PRIVATEKEYNEW" > ~/.ssh/gitlabnew.pub | base64 --decode)
     # - echo $PRIVATEKEYNEW > ~/.ssh/gitlabnew.pem
     # - sudo chmod 400 ~/.ssh/gitlab.pem
