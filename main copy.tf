@@ -1,3 +1,11 @@
+# resource "aws_s3_bucket" "terraform_state" {
+#   bucket = "${local.bucket_name}"
+#   force_destroy = true
+
+#   tags = {
+#       Name = "${var.bucket_name}"
+#   }
+# }
 
 terraform {
     backend "s3" {
@@ -7,12 +15,26 @@ terraform {
     }
 }
 
+# default vpc
+# data "aws_vpc" "kubernetes-vpc" {
+#   tags = {
+#     Name = "kubernetes-vpc"
+#   }
+# } 
 
 
 data "aws_vpc" "default" {
   default = true
 } 
 
+# resource "aws_vpc" "kubernetes-vpc" {
+#   cidr_block = "${var.vpc_cidr_block}"
+#   enable_dns_hostnames = true
+
+#   tags = {
+#     Name = "kubernetes-vpc"
+#   }
+# }
 
 # kube-master Subnet
 resource "aws_subnet" "kube-master-subnet" {
@@ -98,6 +120,71 @@ resource "aws_security_group" "sg-kube-minions-allow-ssh" {
 }
 
 
+# igw
+# resource "aws_internet_gateway" "kubernetes-igw" {
+#   vpc_id = "${data.aws_vpc.default.id}"
+
+#   tags = {
+#     Name = "kubernetes-igw"
+#   }
+# }
+
+# # eip for nat gateway
+# resource "aws_eip" "kubernetes_eip_for_ngw" {
+#   vpc = true
+# }
+
+
+# ngw - commenting since SLIIT doesn't allow this
+# resource "aws_nat_gateway" "kubernetes-ngw" {
+#   allocation_id = "${aws_eip.kubernetes_eip_for_ngw.id}"
+#   subnet_id = "${aws_subnet.kube-master-subnet.id}"
+
+#   tags = {
+#     Name = "kubernetes-ngw"
+#   }
+# }
+
+
+# route Table for kube-master
+# resource "aws_route_table" "kube-master-rt" {
+#   vpc_id = "${data.aws_vpc.default.id}"
+
+#   route {
+#     cidr_block = "0.0.0.0/0"
+#     # gateway_id = "${aws_internet_gateway.kubernetes-igw.id}"
+#   }
+
+#   tags = {
+#     Name = "kube-master-rt"
+#   }
+# }
+
+# route Table for kube-minion - commenting since SLIIT doesn't allow to create NGW and this uses it
+# resource "aws_route_table" "kube-minion-rt" {
+#   vpc_id = "${aws_vpc.id}"
+
+#   route {
+#     cidr_block = "0.0.0.0/0"
+#     nat_gateway_id = "${aws_nat_gateway.kubernetes-ngw.id}"
+#   }
+
+#   tags = {
+#     Name = "kube-minion-rt"
+#   }
+# }
+
+# associate the kube-master subnet
+# resource "aws_route_table_association" "kube-master-association" {
+#   subnet_id = "${aws_subnet.kube-master-subnet.id}"
+#   route_table_id = "${aws_route_table.kube-master-rt.id}"
+# }
+
+# associate the kube-minion subnet
+# resource "aws_route_table_association" "kube-minion-association" {
+#   subnet_id = "${aws_subnet.kube-minion-subnet.id}"
+#   route_table_id = "${aws_route_table.kube-minion-rt.id}"
+# }
 
 # key-pair
 resource "aws_key_pair" "public" {
@@ -125,6 +212,20 @@ resource "aws_instance" "kubernetes_master" {
       Name = "${count.index == 0 ? "kube-master" : "kube-minion-${count.index}"}"
   }
 }
+
+# data "aws_instance" "name" {
+#   # filter {
+#   #   name   = "tag:Name"
+#   #   values = ["kube-master"]
+#   # }
+
+#   filter {
+#     name = "image-id"
+#     values = ["${var.ec2-ami}"]
+#   }
+
+#   depends_on = [aws_instance.kubernetes_master]
+# }
 
 
 output "ips" {
