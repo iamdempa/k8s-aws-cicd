@@ -13,7 +13,7 @@ ssh-publickey:
     - pwd
     - mkdir -p ~/.ssh
     # - chmod 700 ~/.ssh/gitlab.pem
-    - echo $PRIVATEKEYNEW | ssh-add - > ~/.ssh/machan.pem
+    - echo -n $PRIVATEKEYNEW | ssh-add - > ~/.ssh/machan2.pem
     - echo -n "$PRIVATEKEYNEW" | ssh-add - > ~/.ssh/gitlabnew.pem
     # - echo $PRIVATEKEYNEW > ~/.ssh/gitlabnew.pem
     # - sudo chmod 400 ~/.ssh/gitlab.pem
