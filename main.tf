@@ -116,6 +116,7 @@ resource "aws_instance" "kubernetes_master" {
 
   user_data = <<-EOF
               #!/bin/bash           
+              sudo amazon-linux-extras install ansible2 -y
               echo "${file("${var.public_key_path}")}" >> /home/ec2-user/.ssh/authorized_keys
               echo "${file("${var.private_key_path}")}" > /home/ec2-user/.ssh/gitlabnew.pem
               pwd
@@ -137,6 +138,7 @@ resource "aws_instance" "kubernetes_minion" {
 
   user_data = <<-EOF
               #!/bin/bash           
+              sudo amazon-linux-extras install ansible2 -y
               echo "${file("${var.public_key_path}")}" > /home/ec2-user/.ssh/authorized_keys              
               pwd
             EOF
