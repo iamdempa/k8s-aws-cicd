@@ -23,8 +23,6 @@ ssh-publickey:
   tags:
     - banuka
 
-
-
 prerequisites-install:
   stage: prerequisites-install
   script:
