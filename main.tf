@@ -152,7 +152,7 @@ resource "aws_route_table" "kube-master-rt" {
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = "${aws_internet_gateway.kubernetes-igw.id}"
+    # gateway_id = "${aws_internet_gateway.kubernetes-igw.id}"
   }
 
   tags = {
