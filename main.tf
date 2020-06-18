@@ -147,18 +147,18 @@ resource "aws_security_group" "sg-kube-minions-allow-ssh" {
 
 
 # route Table for kube-master
-resource "aws_route_table" "kube-master-rt" {
-  vpc_id = "${data.aws_vpc.default.id}"
+# resource "aws_route_table" "kube-master-rt" {
+#   vpc_id = "${data.aws_vpc.default.id}"
 
-  route {
-    cidr_block = "0.0.0.0/0"
-    # gateway_id = "${aws_internet_gateway.kubernetes-igw.id}"
-  }
+#   route {
+#     cidr_block = "0.0.0.0/0"
+#     # gateway_id = "${aws_internet_gateway.kubernetes-igw.id}"
+#   }
 
-  tags = {
-    Name = "kube-master-rt"
-  }
-}
+#   tags = {
+#     Name = "kube-master-rt"
+#   }
+# }
 
 # route Table for kube-minion - commenting since SLIIT doesn't allow to create NGW and this uses it
 # resource "aws_route_table" "kube-minion-rt" {
@@ -175,10 +175,10 @@ resource "aws_route_table" "kube-master-rt" {
 # }
 
 # associate the kube-master subnet
-resource "aws_route_table_association" "kube-master-association" {
-  subnet_id = "${aws_subnet.kube-master-subnet.id}"
-  route_table_id = "${aws_route_table.kube-master-rt.id}"
-}
+# resource "aws_route_table_association" "kube-master-association" {
+#   subnet_id = "${aws_subnet.kube-master-subnet.id}"
+#   route_table_id = "${aws_route_table.kube-master-rt.id}"
+# }
 
 # associate the kube-minion subnet
 # resource "aws_route_table_association" "kube-minion-association" {
