@@ -165,7 +165,7 @@ EOD
   }
 }
 
-resource "null_resource" "web" {
+resource "null_resource" "web2" {
 
 provisioner "local-exec" {
       command = <<EOD
