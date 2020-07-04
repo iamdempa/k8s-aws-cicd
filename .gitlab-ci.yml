@@ -12,6 +12,7 @@ Testing:
   stage: test
   script:
     - echo "testing"
+    - pwd
   tags:
     - banuka
 
