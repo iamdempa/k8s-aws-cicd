@@ -22,7 +22,8 @@
     - name: CAT
       become: true
       shell: |
-        cat <<EOF > /etc/apt/sources.list.d/kubernetes.list
+        . /etc/apt/sources.list.d/kubernetes.list
+        cat <<-EOF
         deb https://apt.kubernetes.io/ kubernetes-xenial main
         hi machan
         EOF  
