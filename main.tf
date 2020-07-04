@@ -164,7 +164,6 @@ ${aws_instance.kubernetes_master.public_ip}
 ${aws_instance.kubernetes_minion.0.public_ip}
 ${aws_instance.kubernetes_minion.1.public_ip}
 ${aws_instance.kubernetes_minion.2.public_ip}
-${aws_instance.kubernetes_minion.3.public_ip}
 EOF
 EOD
   }
