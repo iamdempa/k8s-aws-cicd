@@ -78,6 +78,7 @@ test-ansible:
     - ls
   tags:
     - banuka
+    
 
 ansible-commands:
   stage: ansible-commands
