@@ -4,5 +4,5 @@
   tasks:
     - name: Copy the file
       copy:
-        src: "/etc/ansible/machan.txt"
+        src: "/etc/ansible/hosts"
         dest: "/root/machan.txt"

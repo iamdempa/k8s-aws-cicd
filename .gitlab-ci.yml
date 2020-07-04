@@ -70,11 +70,16 @@ deploy:
 
 
 test-ansible:
-  stage: test-ansible  
+  stage: test-ansible
+  retry:
+    max: 3
+    when:
+      - always  
   script:
     - pwd
   # - export ANSIBLE_HOST_KEY_CHECKING=False
-    - echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
+    - sudo echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
+    - cat /etc/ssh/ssh_config
     - cat /etc/ansible/hosts
     - cd ~/.ssh
     - ls
