@@ -31,13 +31,13 @@ ssh-publickey:
   tags:
     - banuka
 
-# prerequisites-install:
-#   stage: prerequisites-install
-#   script:
-#     - echo "hi"
-#     - sudo yum update -y && sudo yum install wget unzip -y
-#   tags:
-#     - banuka
+prerequisites-install:
+  stage: prerequisites-install
+  script:
+    - echo "hi"
+    - sudo yum update -y && sudo yum install wget unzip -y
+  tags:
+    - banuka
 
 # install_terraform:
 #   stage: install-terraform
