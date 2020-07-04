@@ -147,33 +147,17 @@ resource "aws_instance" "kubernetes_minion" {
   }
 }
 
-resource "null_resource" "web" {
-
-  provisioner "local-exec" {
-        command     = <<EOD
-    cat <<EOF > ip.txt
-[master]
-master ansible_host="${aws_instance.kubernetes_master.public_ip}" ansible_user=root
-[kubeworkers]
-worker1 ansible_host="${aws_instance.kubernetes_minion.0.public_ip}" ansible_user=root
-worker2 ansible_host="${aws_instance.kubernetes_minion.1.public_ip}" ansible_user=root
-worker3 ansible_host="${aws_instance.kubernetes_minion.2.public_ip}" ansible_user=root
-EOF
-EOD
-
-  
-  }
-}
-
 resource "null_resource" "web2" {
 
 provisioner "local-exec" {
       command = <<EOD
 cat <<EOF >> /etc/ansible/hosts
-[dev] 
-hi 
-[dev:vars] 
-machan
+[master] 
+master ansible_host="${aws_instance.kubernetes_master.public_ip}" ansible_user=root 
+[minions] 
+worker1 ansible_host="${aws_instance.kubernetes_minion.0.public_ip}" ansible_user=root
+worker2 ansible_host="${aws_instance.kubernetes_minion.1.public_ip}" ansible_user=root
+worker3 ansible_host="${aws_instance.kubernetes_minion.2.public_ip}" ansible_user=root
 EOF
 EOD
   }
