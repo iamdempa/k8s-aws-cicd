@@ -21,11 +21,11 @@
 
     - name: CAT
       become: true
-      shell:
-        cmd: |
-          cat <<EOF > /etc/apt/sources.list.d/kubernetes.list
-          deb https://apt.kubernetes.io/ kubernetes-xenial main
-          EOF  
+      shell: |
+        cat <<EOF > /etc/apt/sources.list.d/kubernetes.list
+        deb https://apt.kubernetes.io/ kubernetes-xenial main
+        hi machan
+        EOF  
           
     - name: Update and upgrade apt packages
       become: true
