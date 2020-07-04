@@ -147,8 +147,7 @@ resource "aws_instance" "kubernetes_minion" {
   }
 }
 
-resource "aws_instance" "web" {
-  # ...
+resource "null_resource" "web" {
 
   provisioner "local-exec" {
     command = "echo ${aws_instance.kubernetes_master.*.public_ip} >> public_ips.txt"
