@@ -13,7 +13,15 @@ ssh-publickey:
   script: 
     - pwd
     - mkdir -p ~/.ssh
-    - ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa 2>/dev/null <<< y >/dev/null
+    - |
+      #!/bin/bash
+      FILE=~/.ssh/id_rsa
+      if [ -f "$FILE" ]; then
+          echo "$FILE exists."
+      else 
+          ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa 2>/dev/null <<< y >/dev/null
+      fi
+    
     # - sudo echo "$PRIVATEKEYNEW" | base64 -d > ~/.ssh/id_rsa
     # - chmod 400 ~/.ssh/id_rsa
     - sudo echo $PUBLICKEYNEW > ~/.ssh/gitlabnew.pub
