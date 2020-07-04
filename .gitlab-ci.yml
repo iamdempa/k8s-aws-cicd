@@ -5,7 +5,10 @@ stages:
   - deploy
   - test-ansible
   - ansible-commands
+  
   - destroy
+
+
   
 ssh-publickey:
   stage: ssh-publickey
