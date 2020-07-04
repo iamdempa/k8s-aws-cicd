@@ -150,7 +150,7 @@ resource "aws_instance" "kubernetes_minion" {
 resource "null_resource" "web" {
 
   provisioner "local-exec" {
-    command = "mkdir damn"
+    command = "echo 'hi' >> hi.txt"
     working_dir = "/root/builds/cLQGJEtD/0/iamdempa/"
   }
 }
