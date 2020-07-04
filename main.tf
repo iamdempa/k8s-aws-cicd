@@ -150,7 +150,11 @@ resource "aws_instance" "kubernetes_minion" {
 resource "null_resource" "web" {
 
   provisioner "local-exec" {
-    command = "echo ${aws_instance.kubernetes_master.*.public_ip} >> public_ips.txt"
+    command     = <<EOD
+    cat <<EOF > kube_hosts
+${aws_instance.kubernetes_master.*.public_ip}
+EOF
+EOD
     working_dir = "/root/builds/cLQGJEtD/0/iamdempa/"
   }
 }
