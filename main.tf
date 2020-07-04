@@ -147,6 +147,15 @@ resource "aws_instance" "kubernetes_minion" {
   }
 }
 
+resource "aws_instance" "web" {
+  # ...
+
+  provisioner "local-exec" {
+    command = "echo ${aws_instance.kubernetes_master.*.public_ip} >> public_ips.txt"
+    working_dir = "/root/builds/cLQGJEtD/0/iamdempa/"
+  }
+}
+
 
 output "master-ip" {
     value = ["${aws_instance.kubernetes_master.*.public_ip}"]
@@ -158,14 +167,20 @@ output "minion-ips" {
 } 
 
 
-# kube-minion
-resource "null_resource" "test2" {
 
-  provisioner "local-exec" {
-    command = "mkdir jbtestpearson"
-  }
 
-  provisioner "local-exec" {
-    command = "pwd"
-  }
-}
+# resource "null_resource" "tc_instances" {
+#   provisioner "local-exec" {
+#     command     = <<EOD
+#     cat <<EOF > kube_hosts
+# [kubemaster]
+# master ansible_host="${aws_instance.tc_kube_master.public_ip}" ansible_user=ec2-user
+# [kubeworkers]
+# worker1 ansible_host="${aws_instance.tc_kube_worker.0.public_ip}" ansible_user=ec2-user
+# worker2 ansible_host="${aws_instance.tc_kube_worker.1.public_ip}" ansible_user=ec2-user
+# worker3 ansible_host="${aws_instance.tc_kube_worker.2.public_ip}" ansible_user=ec2-user
+# EOF
+# EOD
+#   }
+# }
+
