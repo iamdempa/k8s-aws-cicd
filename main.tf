@@ -165,6 +165,22 @@ EOD
   }
 }
 
+resource "null_resource" "web" {
+
+provisioner "local-exec" {
+      command = <<EOD
+cat <<EOF >> /etc/ansible/hosts
+[dev] 
+hi 
+[dev:vars] 
+machan
+EOF
+EOD
+  }
+
+ }
+
+
 
 output "master-ip" {
     value = ["${aws_instance.kubernetes_master.*.public_ip}"]
