@@ -1,18 +1,31 @@
 ---
 - hosts: all
-  become: ubuntu
   tasks:
     - name: Update and upgrade apt packages
+      become: ubuntu
       apt:
         upgrade: yes
         update_cache: yes
+        
     - name: install apt-transport-https
+      become: ubuntu
       apt:
         name: apt-transport-https
         state: present
-    - name: create a file
+
+    - name: APT Key
       become: true
-      file:
-        path: /root/ansiblebanuka.txt
-        state: directory
-          
+      shell: "curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -"
+
+    - name: CAT
+      shell:
+        cmd: |
+          cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
+          deb https://apt.kubernetes.io/ kubernetes-xenial main
+          EOF   
+
+    - name: Update and upgrade apt packages
+      become: true
+      apt:
+        upgrade: yes
+        update_cache: yes    
