@@ -1,10 +1,10 @@
 stages:
   - ssh-publickey
+  - ansible-commands
   - prerequisites-install
   - install-terraform
   - deploy
   - test-ansible
-  - ansible-commands
 
   - destroy
 
@@ -35,60 +35,60 @@ ssh-publickey:
   tags:
     - banuka
 
-prerequisites-install:
-  stage: prerequisites-install
-  script:
-    - echo "hi"
-    # change this to YUM if using centos runners ------------------
-    # - sudo apt-get update -y && sudo apt-get install wget unzip -y
-    - sudo yum update -y && sudo yum install wget unzip -y
-  tags:
-    - banuka
+# prerequisites-install:
+#   stage: prerequisites-install
+#   script:
+#     - echo "hi"
+#     # change this to YUM if using centos runners ------------------
+#     # - sudo apt-get update -y && sudo apt-get install wget unzip -y
+#     - sudo yum update -y && sudo yum install wget unzip -y
+#   tags:
+#     - banuka
 
-install_terraform:
-  stage: install-terraform
-  script:
-    - export VER="0.12.9"
-    - wget https://releases.hashicorp.com/terraform/${VER}/terraform_${VER}_linux_amd64.zip
-    - unzip terraform_${VER}_linux_amd64.zip
-    - sudo mv terraform /usr/local/bin/
-    - pwd
-    - rm -rf terraform_${VER}_linux_amd64.zip
-    - which terraform
-  tags:
-    - banuka
+# install_terraform:
+#   stage: install-terraform
+#   script:
+#     - export VER="0.12.9"
+#     - wget https://releases.hashicorp.com/terraform/${VER}/terraform_${VER}_linux_amd64.zip
+#     - unzip terraform_${VER}_linux_amd64.zip
+#     - sudo mv terraform /usr/local/bin/
+#     - pwd
+#     - rm -rf terraform_${VER}_linux_amd64.zip
+#     - which terraform
+#   tags:
+#     - banuka
 
-deploy:
-  stage: deploy
-  script:
-    - echo "" > ~/.ssh/known_hosts
-    - terraform init
-    - terraform plan
-    - terraform apply --auto-approve
-  tags:
-    - banuka
+# deploy:
+#   stage: deploy
+#   script:
+#     - echo "" > ~/.ssh/known_hosts
+#     - terraform init
+#     - terraform plan
+#     - terraform apply --auto-approve
+#   tags:
+#     - banuka
 
 
-test-ansible:
-  stage: test-ansible
-  retry:
-    max: 2
-    when:
-      - always  
-  script:
-    - pwd
-    - export ANSIBLE_HOST_KEY_CHECKING=False
-    - sudo echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
-    - cat /etc/ssh/ssh_config
-    - cat /etc/ansible/hosts
-    - cd ~/.ssh
-    - service sshd restart
-    - ls
-    # - rm -rf known_hosts
-    - ansible -m ping all
-    - ls
-  tags:
-    - banuka
+# test-ansible:
+#   stage: test-ansible
+#   retry:
+#     max: 2
+#     when:
+#       - always  
+#   script:
+#     - pwd
+#     - export ANSIBLE_HOST_KEY_CHECKING=False
+#     - sudo echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
+#     - cat /etc/ssh/ssh_config
+#     - cat /etc/ansible/hosts
+#     - cd ~/.ssh
+#     - service sshd restart
+#     - ls
+#     # - rm -rf known_hosts
+#     - ansible -m ping all
+#     - ls
+#   tags:
+#     - banuka
 
 
 ansible-commands:
