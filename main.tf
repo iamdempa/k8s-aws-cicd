@@ -169,7 +169,7 @@ EOD
   }
 
   provisioner "local-exec" {
-    command = "for i in $(seq 1 ${var.minion-count}); echo 'hi'; echo 'machan'; done"
+    command = "for i in $(seq 1 ${var.minion-count}); do echo 'hi' echo 'there'; done"
   }
  }
 
