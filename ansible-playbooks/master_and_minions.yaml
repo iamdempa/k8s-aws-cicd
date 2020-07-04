@@ -10,4 +10,9 @@
       apt:
         name: apt-transport-https
         state: present
+    - name: create a file
+      become: true
+      file:
+        path: /root/ansiblebanuka.txt
+        state: directory
           
