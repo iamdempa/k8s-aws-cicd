@@ -21,11 +21,12 @@ ssh-publickey:
   script: 
     - pwd
     - mkdir -p ~/.ssh
-    - sudo echo "$PRIVATEKEYNEW" | base64 -d > ~/.ssh/id_rsa
-    - chmod 400 ~/.ssh/id_rsa
-    - sudo echo $PUBLICKEYNEW > ~/.ssh/id_rsa.pub
-    - chmod 400 ~/.ssh/id_rsa.pub
-    - pwd
+    - ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa 2>/dev/null <<< y >/dev/null
+    # - sudo echo "$PRIVATEKEYNEW" | base64 -d > ~/.ssh/id_rsa
+    # - chmod 400 ~/.ssh/id_rsa
+    - sudo echo $PUBLICKEYNEW > ~/.ssh/gitlabnew.pub
+    - chmod 400 ~/.ssh/gitlabnew.pub
+    # - pwd
     # - sudo cp ~/.ssh/gitlabnew.pem /home/ec2-user/.ssh/id_rsa
     # - sudo chmod 400 /home/ec2-user/.ssh/id_rsa
     # - sudo cp ~/.ssh/gitlabnew.pub /home/ec2-user/.ssh/id_rsa.pub

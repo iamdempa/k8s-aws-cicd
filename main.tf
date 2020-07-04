@@ -102,7 +102,7 @@ resource "aws_security_group" "sg-kube-minions-allow-ssh" {
 # key-pair
 resource "aws_key_pair" "public" {
   key_name = "gitlabnew"
-  public_key = "${file("${var.public_key_path}")}"
+  public_key = "${file("${var.gitlabnew_login_key_path}")}"
 }
  
 # kube-master
@@ -118,7 +118,7 @@ resource "aws_instance" "kubernetes_master" {
               #!/bin/bash           
               sudo amazon-linux-extras install ansible2 -y
               echo "${file("${var.public_key_path}")}" >> /root/.ssh/authorized_keys
-              echo "${file("${var.public_key_path}")}" >> /root/.ssh/gitlabnewpub.txt
+              echo "${file("${var.gitlabnew_login_key_path}")}" >> /root/.ssh/gitlabnew_login_key_path.txt
               pwd
             EOF
 
@@ -138,9 +138,8 @@ resource "aws_instance" "kubernetes_minion" {
 
   user_data = <<-EOF
               #!/bin/bash           
-              sudo amazon-linux-extras install ansible2 -y
               echo "${file("${var.public_key_path}")}" >> /root/.ssh/authorized_keys   
-              echo "${file("${var.public_key_path}")}" >> /root/.ssh/gitlabnewpub.txt           
+              echo "${file("${var.gitlabnew_login_key_path}")}" >> /root/.ssh/gitlabnew_login_key_path.txt           
             EOF
 
   tags = {
