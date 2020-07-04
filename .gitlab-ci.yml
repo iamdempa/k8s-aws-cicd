@@ -5,7 +5,7 @@ stages:
   - deploy
   - test-ansible
   - ansible-commands
-  
+
   - destroy
 
 
@@ -40,7 +40,8 @@ prerequisites-install:
   script:
     - echo "hi"
     # change this to YUM if using centos runners ------------------
-    - sudo apt-get update -y && sudo apt-get install wget unzip -y
+    # - sudo apt-get update -y && sudo apt-get install wget unzip -y
+    - sudo yum update -y && sudo yum install wget unzip -y
   tags:
     - banuka
 
