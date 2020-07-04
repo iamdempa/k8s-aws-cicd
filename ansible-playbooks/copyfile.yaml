@@ -5,4 +5,4 @@
     - name: Copy the file
       copy:
         src: "/etc/ansible/machan.txt"
-        dest: /etc/machan.txt
+        dest: "/root/machan.txt"
