@@ -22,7 +22,10 @@
     - name: CAT
       become: true
       shell:
-        cmd: echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" > /etc/apt/sources.list.d/kubernetes.lis
+        cmd: |
+          cat <<EOF > /etc/apt/sources.list.d/kubernetes.list
+          deb https://apt.kubernetes.io/ kubernetes-xenial main
+          EOF  
           
     - name: Update and upgrade apt packages
       become: true
@@ -31,6 +34,4 @@
         update_cache: yes    
 
 
-  #  cat <<EOF > /etc/apt/sources.list.d/kubernetes.list
-  #         deb https://apt.kubernetes.io/ kubernetes-xenial main
-  #         EOF  
+          
