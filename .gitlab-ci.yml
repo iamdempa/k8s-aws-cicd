@@ -84,6 +84,8 @@ running-ansible:
   script:
     - echo "ansible"
     - ansible-playbook ./ansible-playbooks/copyfile.yaml
+  tags:
+    - banuka
 
 # destroy:
 #   stage: destroy
