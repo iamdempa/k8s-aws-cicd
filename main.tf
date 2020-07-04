@@ -168,13 +168,13 @@ EOF
 EOD
   }
 
-  provisioner "local-exec" {
-    command = "for i in $(seq 1 ${var.minion-count}); do cat <<EOF > /etc/ansible/machan
-                  [all] 
-                  ${aws_instance.kubernetes_master.public_ip}
-                  ${aws_instance.kubernetes_minion.$i.public_ip}
-                  EOF; done"
-  }
+  # provisioner "local-exec" {
+  #   command = "for i in $(seq 1 ${var.minion-count}); do cat <<EOF > /etc/ansible/machan
+  #                 [all] 
+  #                 ${aws_instance.kubernetes_master.public_ip}
+  #                 ${aws_instance.kubernetes_minion.$i.public_ip}
+  #                 EOF; done"
+  # }
  }
 
 #  ${aws_instance.kubernetes_minion.0.public_ip}
