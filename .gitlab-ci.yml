@@ -78,7 +78,13 @@ test-ansible:
   script:
     - pwd
   # - export ANSIBLE_HOST_KEY_CHECKING=False
-    - sudo echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
+
+    - $File=/etc/ssh/ssh_config
+    - SomeString="StrictHostKeyChecking no"
+    - |
+      if grep -q $SomeString "$File"; then
+       sudo echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
+      fi
     - cat /etc/ssh/ssh_config
     - cat /etc/ansible/hosts
     - cd ~/.ssh
