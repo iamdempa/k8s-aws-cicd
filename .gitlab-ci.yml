@@ -70,6 +70,7 @@ test-ansible:
     # - export ANSIBLE_HOST_KEY_CHECKING=False
     - cat /etc/ansible/hosts
     - cd ~/.ssh
+    - ls
     - rm -rf known_hosts
     - ansible -m ping all
   tags:
