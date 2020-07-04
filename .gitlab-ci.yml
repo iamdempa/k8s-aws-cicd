@@ -60,6 +60,8 @@ deploy:
     - terraform init
     - terraform plan
     - terraform apply --auto-approve
+
+    # - export ANSIBLE_HOST_KEY_CHECKING=False
     - cat /etc/ansible/hosts
     - cd ~/.ssh
     - ls
