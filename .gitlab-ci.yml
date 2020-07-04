@@ -60,7 +60,7 @@ test-ansible:
   stage: test-ansible
   script:
     - export ANSIBLE_HOST_KEY_CHECKING=False
-    - ansible -m ping all
+    - sudo ansible -m ping all
   tags:
     - banuka
 
