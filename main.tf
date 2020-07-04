@@ -161,7 +161,7 @@ worker3 ansible_host="${aws_instance.kubernetes_minion.2.public_ip}" ansible_use
 EOF
 EOD
 
-  }
+  
   }
 }
 
