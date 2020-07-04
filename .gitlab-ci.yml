@@ -48,6 +48,7 @@ install_terraform:
 deploy:
   stage: deploy
   script:
+    - echo "" > ~/.ssh/known_hosts
     - terraform init
     - terraform plan
     - terraform apply --auto-approve
