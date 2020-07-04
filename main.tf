@@ -169,7 +169,7 @@ EOD
   }
 
   provisioner "local-exec" {
-    command = "RANGE=${var.minion-count} NEWRANGE=RANGE-1 for i in $(seq 0 $NEWRANGE); do echo $1; done"
+    command = "num1=${var.minion-count} num2=1 num3=$[num1 - num2] for i in $(seq 0 $num3); do echo $1; done"
   }
  }
 
