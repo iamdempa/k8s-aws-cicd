@@ -156,18 +156,21 @@ resource "null_resource" "web3" {
       command = "rm -rf ~/.ssh/known_hosts"
   }
 
-provisioner "local-exec" {
-      command = <<EOD
-cat <<EOF > /etc/ansible/hosts
-[all] 
-${aws_instance.kubernetes_master.public_ip}
-${aws_instance.kubernetes_minion.0.public_ip}
-${aws_instance.kubernetes_minion.1.public_ip}
-${aws_instance.kubernetes_minion.2.public_ip}
-EOF
-EOD
+  provisioner "local-exec" {
+        command = <<EOD
+                  cat <<EOF > /etc/ansible/hosts
+                  [all] 
+                  ${aws_instance.kubernetes_master.public_ip}
+                  ${aws_instance.kubernetes_minion.0.public_ip}
+                  ${aws_instance.kubernetes_minion.1.public_ip}
+                  ${aws_instance.kubernetes_minion.2.public_ip}
+                  EOF
+                  EOD
   }
 
+  provisioner "local-exec" {
+    command = "for i in $(seq 1 ${var.minion-count}); do echo $i; done"
+  }
  }
 
 #  ${aws_instance.kubernetes_minion.0.public_ip}
