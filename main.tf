@@ -168,10 +168,10 @@ EOF
 EOD
   }
 
-  provisioner "local-exec" {
-    command = "num1=${var.minion-count} && num2=1 && num3=$[num1 - num2] && for i in $(seq 0 $num3); do echo ${aws_instance.kubernetes_minion[$i].public_ip} > /etc/ansible/machan; done"
-    # command = "num1=${var.minion-count} num2=1 num3=$[num1 - num2] for i in $(seq 0 $num3); do echo $1; done"
-  }
+  # provisioner "local-exec" {
+  #   command = "num1=${var.minion-count} && num2=1 && num3=$[num1 - num2] && for i in $(seq 0 $num3); do echo ${aws_instance.kubernetes_minion..public_ip} > /etc/ansible/machan.txt; done"
+  #   # command = "num1=${var.minion-count} num2=1 num3=$[num1 - num2] for i in $(seq 0 $num3); do echo $1; done"
+  # }
  }
 
 #  ${aws_instance.kubernetes_minion.0.public_ip}

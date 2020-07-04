@@ -4,7 +4,7 @@ stages:
   - install-terraform
   - deploy
   - test-ansible
-  
+  - ansible-commands
   - destroy
   
 ssh-publickey:
@@ -65,7 +65,7 @@ deploy:
 
 
 test-ansible:
-  stage: test-ansible
+  stage: test-ansiible  
   script:
     - pwd
   # - export ANSIBLE_HOST_KEY_CHECKING=False
@@ -78,6 +78,12 @@ test-ansible:
     - ls
   tags:
     - banuka
+
+running-ansible:
+  stage: ansible-commands
+  script:
+    - echo "ansible"
+    - ansible-playbook ./ansible-playbooks/copyfile.yaml
 
 # destroy:
 #   stage: destroy
