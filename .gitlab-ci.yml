@@ -16,20 +16,20 @@ Testing:
   tags:
     - banuka
 
-# ssh-publickey:
-#   stage: ssh-publickey
-#   script: 
-#     - pwd
-#     - mkdir -p ~/.ssh
-#     - sudo echo "$PRIVATEKEYNEW" | base64 -d > ~/.ssh/gitlabnew.pem
-#     - chmod 400 ~/.ssh/gitlabnew.pem
-#     - sudo echo $PUBLICKEYNEW > ~/.ssh/gitlabnew.pub
-#     - pwd
-#     # - sudo cp ~/.ssh/gitlabnew.pem /home/ec2-user/.ssh/id_rsa
-#     # - sudo chmod 400 /home/ec2-user/.ssh/id_rsa
-#     # - sudo cp ~/.ssh/gitlabnew.pub /home/ec2-user/.ssh/id_rsa.pub
-#   tags:
-#     - banuka
+ssh-publickey:
+  stage: ssh-publickey
+  script: 
+    - pwd
+    - mkdir -p ~/.ssh
+    - sudo echo "$PRIVATEKEYNEW" | base64 -d > ~/.ssh/gitlabnew.pem
+    - chmod 400 ~/.ssh/gitlabnew.pem
+    - sudo echo $PUBLICKEYNEW > ~/.ssh/gitlabnew.pub
+    - pwd
+    # - sudo cp ~/.ssh/gitlabnew.pem /home/ec2-user/.ssh/id_rsa
+    # - sudo chmod 400 /home/ec2-user/.ssh/id_rsa
+    # - sudo cp ~/.ssh/gitlabnew.pub /home/ec2-user/.ssh/id_rsa.pub
+  tags:
+    - banuka
 
 # prerequisites-install:
 #   stage: prerequisites-install
