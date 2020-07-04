@@ -78,7 +78,7 @@ test-ansible:
     - cat /etc/ansible/hosts
     - cd ~/.ssh
     - ls
-    - rm -rf known_hosts
+    # - rm -rf known_hosts
     - ansible -m ping all
     - ls
   tags:
