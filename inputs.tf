@@ -13,6 +13,11 @@ variable "private_key_path" {
   default = "/root/.ssh/id_rsa"
 }
 
+variable "minion-count" {
+  type = "number"
+  default = 3
+}
+
 variable "ec2-ami" {
   type = "string"
 

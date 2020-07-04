@@ -129,7 +129,7 @@ resource "aws_instance" "kubernetes_master" {
 
 resource "aws_instance" "kubernetes_minion" {
   ami = "${var.ec2-ami}"
-  count = 4
+  count = "${var.minion-count}"
   instance_type = "${var.ec2-type}"
   key_name = "${aws_key_pair.public.key_name}"
   subnet_id = "${aws_subnet.kube-master-subnet.id}"
