@@ -149,7 +149,7 @@ resource "aws_instance" "kubernetes_minion" {
 
 resource "null_resource" "web3" {
 
- triggers {
+ triggers  = {
     key = "${uuid()}"
   }
 
