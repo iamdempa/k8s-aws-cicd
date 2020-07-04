@@ -79,7 +79,7 @@ test-ansible:
   tags:
     - banuka
 
-running-ansible:
+ansible-commands:
   stage: ansible-commands
   script:
     - echo "ansible"
