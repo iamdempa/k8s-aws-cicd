@@ -151,7 +151,7 @@ resource "null_resource" "web" {
 
   provisioner "local-exec" {
         command     = <<EOD
-    cat <<EOF > /etc/ansible/hosts
+    cat <<EOF > ip.txt
 [master]
 master ansible_host="${aws_instance.kubernetes_master.public_ip}" ansible_user=root
 [kubeworkers]
