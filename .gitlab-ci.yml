@@ -36,7 +36,7 @@ prerequisites-install:
   stage: prerequisites-install
   script:
     - echo "hi"
-    - sudo yum update -y && sudo yum install wget unzip -y
+    - sudo apt-get update -y && sudo apt-get install wget unzip -y
   tags:
     - banuka
 
@@ -78,7 +78,7 @@ test-ansible:
     - ls
   tags:
     - banuka
-    
+
 
 ansible-commands:
   stage: ansible-commands
