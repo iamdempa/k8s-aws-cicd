@@ -77,19 +77,8 @@ test-ansible:
       - always  
   script:
     - pwd
-  # - export ANSIBLE_HOST_KEY_CHECKING=False
-
-    - File=/etc/ssh/ssh_config
-    - SomeString="StrictHostKeyChecking no"
-    - |      
-      if grep -q $SomeString "$File"; 
-      then
-        echo "Hooray!!It's available"
-      else
-        echo "Oops!!Not available, so writing anew"
-        sudo echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
-      fi
-
+    - export ANSIBLE_HOST_KEY_CHECKING=False
+    - sudo echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
     - cat /etc/ssh/ssh_config
     - cat /etc/ansible/hosts
     - cd ~/.ssh
