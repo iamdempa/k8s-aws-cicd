@@ -4,6 +4,7 @@ stages:
   - install-terraform
   - configure-ansible
   - deploy
+  - test-ansible
   
   - destroy
   
@@ -52,6 +53,14 @@ deploy:
     - terraform init
     - terraform plan
     - terraform apply --auto-approve
+  tags:
+    - banuka
+
+test-ansible:
+  stage: test-ansible
+  script:
+    - export ANSIBLE_HOST_KEY_CHECKING=False
+    - ansible -m ping all
   tags:
     - banuka
 
