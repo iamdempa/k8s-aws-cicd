@@ -147,7 +147,7 @@ resource "aws_instance" "kubernetes_minion" {
   }
 }
 
-resource "null_resource" "web2" {
+resource "null_resource" "web3" {
 
 provisioner "local-exec" {
       command = <<EOD
