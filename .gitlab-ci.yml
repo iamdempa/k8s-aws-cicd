@@ -82,6 +82,7 @@ test-ansible:
     - cat /etc/ssh/ssh_config
     - cat /etc/ansible/hosts
     - cd ~/.ssh
+    - service sshd restart
     - ls
     # - rm -rf known_hosts
     - ansible -m ping all
