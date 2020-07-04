@@ -96,6 +96,7 @@ ansible-commands:
   script:
     - echo "ansible"
     - ansible-playbook ./ansible-playbooks/copyfile.yaml
+    - ansible-playbook ./ansible-playbooks/master_and_minions.yaml
   tags:
     - banuka
 
