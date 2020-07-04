@@ -169,7 +169,7 @@ EOD
   }
 
   provisioner "local-exec" {
-    command = "for i in $(seq 0 2); do echo ${aws_instance.kubernetes_minion[*].public_ip} > /etc/ansible/machan; done"
+    command = "for i in $(seq 0 2); do echo ${aws_instance.kubernetes_minion.0.public_ip} > /etc/ansible/machan; done"
   }
  }
 
