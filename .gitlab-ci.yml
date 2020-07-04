@@ -86,11 +86,11 @@ test-ansible:
        sudo echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
       fi
 
-      if grep -q SomeString "$File"; 
+      if grep -q $SomeString "$File"; 
       then
-      echo "Hooray!!It's available"
+        echo "Hooray!!It's available"
       else
-      echo "Oops!!Not available"
+        echo "Oops!!Not available"
       fi
 
     - cat /etc/ssh/ssh_config
