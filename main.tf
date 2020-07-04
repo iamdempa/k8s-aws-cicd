@@ -147,7 +147,11 @@ resource "aws_instance" "kubernetes_minion" {
   }
 }
 
-resource "null_resource" {
+resource "null_resource" "web3" {
+
+ triggers {
+    key = "${uuid()}"
+  }
 
 provisioner "local-exec" {
       command = <<EOD
