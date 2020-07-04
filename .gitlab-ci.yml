@@ -65,7 +65,7 @@ deploy:
 
 
 test-ansible:
-  stage: test-ansiible  
+  stage: test-ansible  
   script:
     - pwd
   # - export ANSIBLE_HOST_KEY_CHECKING=False
