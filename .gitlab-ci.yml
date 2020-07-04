@@ -36,6 +36,7 @@ prerequisites-install:
   stage: prerequisites-install
   script:
     - echo "hi"
+    # change this to YUM if using centos runners ------------------
     - sudo apt-get update -y && sudo apt-get install wget unzip -y
   tags:
     - banuka

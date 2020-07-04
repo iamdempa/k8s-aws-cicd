@@ -1,9 +1,3 @@
-
-provider "aws" {
-  region = "${local.region}"
-}
-
-
 terraform {
     backend "s3" {
         bucket = "terraform-state-banuka-cicd"
@@ -11,10 +5,6 @@ terraform {
         region = "us-east-1"
     }
 }
-
-
-
-
 
 data "aws_vpc" "default" {
   default = true
