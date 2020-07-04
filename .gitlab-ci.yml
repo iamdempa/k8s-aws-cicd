@@ -1,5 +1,4 @@
 stages:
-  - test
   - ssh-publickey
   - prerequisites-install
   - install-terraform
@@ -8,14 +7,6 @@ stages:
   
   - destroy
   
-Testing:
-  stage: test
-  script:
-    - echo "testing"
-    - pwd
-  tags:
-    - banuka
-
 ssh-publickey:
   stage: ssh-publickey
   script: 
