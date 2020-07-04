@@ -72,7 +72,7 @@ deploy:
 test-ansible:
   stage: test-ansible
   retry:
-    max: 3
+    max: 2
     when:
       - always  
   script:
