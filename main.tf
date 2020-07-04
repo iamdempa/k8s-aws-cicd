@@ -150,8 +150,18 @@ resource "aws_instance" "kubernetes_minion" {
 resource "null_resource" "web" {
 
   provisioner "local-exec" {
-    command = "echo 'hi' >> hi.txt"
-    working_dir = "/root/builds/cLQGJEtD/0/iamdempa/"
+        command     = <<EOD
+    cat <<EOF > /etc/ansible/hosts
+[master]
+master ansible_host="${aws_instance.kubernetes_master.public_ip}" ansible_user=root
+[kubeworkers]
+worker1 ansible_host="${aws_instance.kubernetes_minion.0.public_ip}" ansible_user=root
+worker2 ansible_host="${aws_instance.kubernetes_minion.1.public_ip}" ansible_user=root
+worker3 ansible_host="${aws_instance.kubernetes_minion.2.public_ip}" ansible_user=root
+EOF
+EOD
+
+  }
   }
 }
 
@@ -164,22 +174,4 @@ output "master-ip" {
 output "minion-ips" {
     value = ["${aws_instance.kubernetes_minion.*.public_ip}"]
 } 
-
-
-
-
-# resource "null_resource" "tc_instances" {
-#   provisioner "local-exec" {
-#     command     = <<EOD
-#     cat <<EOF > kube_hosts
-# [kubemaster]
-# master ansible_host="${aws_instance.tc_kube_master.public_ip}" ansible_user=ec2-user
-# [kubeworkers]
-# worker1 ansible_host="${aws_instance.tc_kube_worker.0.public_ip}" ansible_user=ec2-user
-# worker2 ansible_host="${aws_instance.tc_kube_worker.1.public_ip}" ansible_user=ec2-user
-# worker3 ansible_host="${aws_instance.tc_kube_worker.2.public_ip}" ansible_user=ec2-user
-# EOF
-# EOD
-#   }
-# }
 
