@@ -1,4 +1,5 @@
 stages:
+  - test
   - ssh-publickey
   - prerequisites-install
   - install-terraform
@@ -7,67 +8,70 @@ stages:
   
   - destroy
   
-ssh-publickey:
-  stage: ssh-publickey
-  script: 
-    - pwd
-    - mkdir -p ~/.ssh
-    # - chmod 700 ~/.ssh/gitlab.pem
-
-    - echo "$PRIVATEKEYNEW"
-    # - sudo echo "$PRIVATEKEYNEW" | base64 -d > ~/.ssh/gitlabnew.pem
-    # - echo $PRIVATEKEYNEW > ~/.ssh/gitlabnew.pem
-    # - sudo chmod 400 ~/.ssh/gitlab.pem
-    - sudo echo $PUBLICKEYNEW > ~/.ssh/gitlabnew.pub
-    - pwd
-    - sudo cp ~/.ssh/gitlabnew.pem /home/ec2-user/.ssh/id_rsa
-    - sudo chmod 400 /home/ec2-user/.ssh/id_rsa
-    - sudo cp ~/.ssh/gitlabnew.pub /home/ec2-user/.ssh/id_rsa.pub
-  tags:
-    - banuka
-
-prerequisites-install:
-  stage: prerequisites-install
+Testing:
+  stage: test
   script:
-    - echo "hi"
-    - sudo yum update -y && sudo yum install wget unzip -y
+    - echo "testing"
   tags:
     - banuka
 
-install_terraform:
-  stage: install-terraform
-  script:
-    - export VER="0.12.9"
-    - wget https://releases.hashicorp.com/terraform/${VER}/terraform_${VER}_linux_amd64.zip
-    - unzip terraform_${VER}_linux_amd64.zip
-    - sudo mv terraform /usr/local/bin/
-    - which terraform
-  tags:
-    - banuka
+# ssh-publickey:
+#   stage: ssh-publickey
+#   script: 
+#     - pwd
+#     - mkdir -p ~/.ssh
+#     - sudo echo "$PRIVATEKEYNEW" | base64 -d > ~/.ssh/gitlabnew.pem
+#     - chmod 400 ~/.ssh/gitlabnew.pem
+#     - sudo echo $PUBLICKEYNEW > ~/.ssh/gitlabnew.pub
+#     - pwd
+#     # - sudo cp ~/.ssh/gitlabnew.pem /home/ec2-user/.ssh/id_rsa
+#     # - sudo chmod 400 /home/ec2-user/.ssh/id_rsa
+#     # - sudo cp ~/.ssh/gitlabnew.pub /home/ec2-user/.ssh/id_rsa.pub
+#   tags:
+#     - banuka
 
-deploy:
-  stage: deploy
-  script:
-    - terraform init
-    - terraform plan
-    - terraform apply --auto-approve
-  tags:
-    - banuka
+# prerequisites-install:
+#   stage: prerequisites-install
+#   script:
+#     - echo "hi"
+#     - sudo yum update -y && sudo yum install wget unzip -y
+#   tags:
+#     - banuka
 
-configure-ansible:
-  stage: configure-ansible
-  script:
-    - pwd
-  tags:
-    - banuka
+# install_terraform:
+#   stage: install-terraform
+#   script:
+#     - export VER="0.12.9"
+#     - wget https://releases.hashicorp.com/terraform/${VER}/terraform_${VER}_linux_amd64.zip
+#     - unzip terraform_${VER}_linux_amd64.zip
+#     - sudo mv terraform /usr/local/bin/
+#     - which terraform
+#   tags:
+#     - banuka
 
-destroy:
-  stage: destroy
-  script:
-    - terraform init
-    - terraform destroy --auto-approve
-  tags:
-    - banuka
+# deploy:
+#   stage: deploy
+#   script:
+#     - terraform init
+#     - terraform plan
+#     - terraform apply --auto-approve
+#   tags:
+#     - banuka
+
+# configure-ansible:
+#   stage: configure-ansible
+#   script:
+#     - pwd
+#   tags:
+#     - banuka
+
+# destroy:
+#   stage: destroy
+#   script:
+#     - terraform init
+#     - terraform destroy --auto-approve
+#   tags:
+#     - banuka
 
     
 

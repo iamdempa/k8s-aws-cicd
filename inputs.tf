@@ -1,11 +1,11 @@
 variable "public_key_path" {
   type = "string"
-  default = "/home/gitlab-runner/.ssh/gitlabnew.pub"
+  default = "/root/.ssh/gitlabnew.pub"
 }
 
 variable "private_key_path" {
   type = "string"
-  default = "/home/gitlab-runner/.ssh/gitlabnew.pem"
+  default = "/root/.ssh/gitlabnew.pem"
 }
 
 variable "ec2-ami" {
