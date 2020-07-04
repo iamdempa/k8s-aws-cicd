@@ -67,8 +67,11 @@ deploy:
 test-ansible:
   stage: test-ansible
   script:
-    - export ANSIBLE_HOST_KEY_CHECKING=False
-    - sudo ansible -m ping all
+    # - export ANSIBLE_HOST_KEY_CHECKING=False
+    - cat /etc/ansible/hosts
+    - cd ~/.ssh
+    - rm -rf known_hosts
+    - ansible -m ping all
   tags:
     - banuka
 
