@@ -165,6 +165,16 @@ EOF
 EOD
   }
 
+  provisioner "local-exec" {
+      command = "export ANSIBLE_HOST_KEY_CHECKING=False"
+  }
+
+
+  provisioner "local-exec" {
+      command = "ansible -m ping all"
+  }
+
+
  }
 
 
