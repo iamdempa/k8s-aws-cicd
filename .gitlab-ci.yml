@@ -2,8 +2,8 @@ stages:
   - ssh-publickey
   - prerequisites-install
   - install-terraform
-  - configure-ansible
   - deploy
+  - test-ansible
   
   - destroy
   
@@ -60,8 +60,15 @@ deploy:
     - terraform init
     - terraform plan
     - terraform apply --auto-approve
+  tags:
+    - banuka
 
-    # - export ANSIBLE_HOST_KEY_CHECKING=False
+
+test-ansible:
+  stage: test-ansible
+  script:
+    - pwd
+  # - export ANSIBLE_HOST_KEY_CHECKING=False
     - echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
     - cat /etc/ansible/hosts
     - cd ~/.ssh
@@ -69,17 +76,8 @@ deploy:
     - rm -rf known_hosts
     - ansible -m ping all
     - ls
-
   tags:
     - banuka
-
-
-# configure-ansible:
-#   stage: configure-ansible
-#   script:
-#     - pwd
-#   tags:
-#     - banuka
 
 # destroy:
 #   stage: destroy
