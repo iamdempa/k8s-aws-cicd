@@ -156,11 +156,10 @@ resource "null_resource" "web3" {
 provisioner "local-exec" {
       command = <<EOD
 cat <<EOF > /etc/ansible/hosts
-[master] 
-master ansible_host="${aws_instance.kubernetes_master.public_ip}" ansible_user=root 
-[minions] 
-worker1 ansible_host="${aws_instance.kubernetes_minion.0.public_ip}" ansible_user=root
-worker2 ansible_host="${aws_instance.kubernetes_minion.1.public_ip}" ansible_user=root
+[all] 
+${aws_instance.kubernetes_master.public_ip}
+${aws_instance.kubernetes_minion.0.public_ip}
+${aws_instance.kubernetes_minion.1.public_ip}
 EOF
 EOD
   }
@@ -177,6 +176,12 @@ EOD
 
  }
 
+
+# [master] 
+# master ansible_host="${aws_instance.kubernetes_master.public_ip}" ansible_user=root 
+# [minions] 
+# worker1 ansible_host="${aws_instance.kubernetes_minion.0.public_ip}" ansible_user=root
+# worker2 ansible_host="${aws_instance.kubernetes_minion.1.public_ip}" ansible_user=root
 
 
 output "master-ip" {
