@@ -11,7 +11,6 @@ ssh-publickey:
   stage: ssh-publickey
   script:
     - echo "tty -s && mesg n || true" >> /root/.profile
-    - config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'" 
     - pwd
     - mkdir -p ~/.ssh
     - |
