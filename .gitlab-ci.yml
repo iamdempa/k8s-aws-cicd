@@ -62,12 +62,13 @@ deploy:
     - terraform apply --auto-approve
 
     # - export ANSIBLE_HOST_KEY_CHECKING=False
+    - echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
     - cat /etc/ansible/hosts
     - cd ~/.ssh
     - ls
     - rm -rf known_hosts
     - ansible -m ping all
-    - cat  ~/.ssh/known_hosts
+
   tags:
     - banuka
 
