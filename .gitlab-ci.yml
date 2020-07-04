@@ -79,7 +79,7 @@ test-ansible:
     - pwd
   # - export ANSIBLE_HOST_KEY_CHECKING=False
 
-    - $File=/etc/ssh/ssh_config
+    - File=/etc/ssh/ssh_config
     - SomeString="StrictHostKeyChecking no"
     - |
       if grep -q $SomeString "$File"; then
