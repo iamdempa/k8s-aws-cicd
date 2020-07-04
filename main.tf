@@ -129,7 +129,7 @@ resource "aws_instance" "kubernetes_master" {
 
 resource "aws_instance" "kubernetes_minion" {
   ami = "${var.ec2-ami}"
-  count = 10
+  count = 4
   instance_type = "${var.ec2-type}"
   key_name = "${aws_key_pair.public.key_name}"
   subnet_id = "${aws_subnet.kube-master-subnet.id}"
@@ -138,8 +138,7 @@ resource "aws_instance" "kubernetes_minion" {
 
   user_data = <<-EOF
               #!/bin/bash           
-              echo "${file("${var.public_key_path}")}" >> /root/.ssh/authorized_keys   
-              echo "${file("${var.gitlabnew_login_key_path}")}" >> /root/.ssh/gitlabnew_login_key_path.txt           
+              echo "${file("${var.public_key_path}")}" >> /root/.ssh/authorized_keys                   
             EOF
 
   tags = {
@@ -166,13 +165,6 @@ ${aws_instance.kubernetes_minion.0.public_ip}
 ${aws_instance.kubernetes_minion.1.public_ip}
 ${aws_instance.kubernetes_minion.2.public_ip}
 ${aws_instance.kubernetes_minion.3.public_ip}
-${aws_instance.kubernetes_minion.4.public_ip}
-${aws_instance.kubernetes_minion.5.public_ip}
-${aws_instance.kubernetes_minion.6.public_ip}
-${aws_instance.kubernetes_minion.7.public_ip}
-${aws_instance.kubernetes_minion.8.public_ip}
-${aws_instance.kubernetes_minion.9.public_ip}
-
 EOF
 EOD
   }
