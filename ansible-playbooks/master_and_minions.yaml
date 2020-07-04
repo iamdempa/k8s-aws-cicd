@@ -21,8 +21,7 @@
 
     - name: CAT
       become: true
-      shell: |
-          cat "deb https://apt.kubernetes.io/ kubernetes-xenial main" > /etc/apt/sources.list.d/kubernetes.list
+      shell: "echo 'deb https://apt.kubernetes.io/ kubernetes-xenial main' > /etc/apt/sources.list.d/kubernetes.lis"
           
     - name: Update and upgrade apt packages
       become: true
