@@ -6,7 +6,7 @@
       apt:
         upgrade: yes
         update_cache: yes
-        
+
     - name: install apt-transport-https
       become: ubuntu
       apt:
@@ -24,8 +24,8 @@
           deb https://apt.kubernetes.io/ kubernetes-xenial main
           EOF   
 
-    - name: Update and upgrade apt packages
-      become: true
-      apt:
-        upgrade: yes
-        update_cache: yes    
+    # - name: Update and upgrade apt packages
+    #   become: true
+    #   apt:
+    #     upgrade: yes
+    #     update_cache: yes    
