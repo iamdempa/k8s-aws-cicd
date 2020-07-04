@@ -52,14 +52,14 @@ install_terraform:
   tags:
     - banuka
 
-# deploy:
-#   stage: deploy
-#   script:
-#     - terraform init
-#     - terraform plan
-#     - terraform apply --auto-approve
-#   tags:
-#     - banuka
+deploy:
+  stage: deploy
+  script:
+    - terraform init
+    - terraform plan
+    - terraform apply --auto-approve
+  tags:
+    - banuka
 
 # configure-ansible:
 #   stage: configure-ansible
