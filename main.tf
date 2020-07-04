@@ -153,11 +153,10 @@ provisioner "local-exec" {
       command = <<EOD
 cat <<EOF >> /etc/ansible/hosts
 [master] 
-master ansible_host=${aws_instance.kubernetes_master.public_ip} ansible_user=root 
+master ansible_host="${aws_instance.kubernetes_master.public_ip}" ansible_user=root 
 [minions] 
-worker1 ansible_host=${aws_instance.kubernetes_minion.0.public_ip} ansible_user=root
-worker2 ansible_host=${aws_instance.kubernetes_minion.1.public_ip} ansible_user=root
-worker3 ansible_host=${aws_instance.kubernetes_minion.2.public_ip} ansible_user=root
+worker1 ansible_host="${aws_instance.kubernetes_minion.0.public_ip}" ansible_user=root
+worker2 ansible_host="${aws_instance.kubernetes_minion.1.public_ip}" ansible_user=root
 EOF
 EOD
   }
