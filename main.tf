@@ -147,6 +147,11 @@ resource "aws_instance" "kubernetes_minion" {
   }
 }
 
+resource "local_file" "example" {
+  content  = join("\n", aws_instance.kubernetes_minion[*].public_ip)
+  filename = "/etc/ansible/machan"
+}
+
 resource "null_resource" "web3" {
 
  triggers  = {
