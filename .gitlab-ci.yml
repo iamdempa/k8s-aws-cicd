@@ -1,10 +1,11 @@
 stages:
   - ssh-publickey
-  - ansible-commands
   - prerequisites-install
   - install-terraform
   - deploy
   - test-ansible
+
+  - ansible-commands
   - destroy
 
 ssh-publickey:
@@ -58,13 +59,12 @@ deploy:
   tags:
     - banuka
 
-
 test-ansible:
   stage: test-ansible
   retry:
     max: 2
     when:
-      - always  
+      - always
   script:
     - pwd
     - export ANSIBLE_HOST_KEY_CHECKING=False
@@ -80,7 +80,6 @@ test-ansible:
   tags:
     - banuka
 
-
 ansible-commands:
   stage: ansible-commands
   script:
@@ -89,7 +88,6 @@ ansible-commands:
     - ansible-playbook ./ansible-playbooks/master_and_minions.yaml
   tags:
     - banuka
-
 # destroy:
 #   stage: destroy
 #   script:
@@ -97,6 +95,4 @@ ansible-commands:
 #     - terraform destroy --auto-approve
 #   tags:
 #     - banuka
-
-    
 
