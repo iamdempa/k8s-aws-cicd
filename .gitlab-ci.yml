@@ -5,7 +5,8 @@ stages:
   - deploy
   - restart-sshd
   - test-ansible
-  - ansible-commands
+  - master-minion
+  - master
   - join-nodes
   - destroy
 
@@ -94,12 +95,38 @@ test-ansible:
   tags:
     - banuka
 
-ansible-commands:
-  stage: ansible-commands
+# ansible-commands:
+#   stage: ansible-commands
+#   script:
+#     - echo "ansible"
+#     - ansible-playbook ./ansible-playbooks/master_and_minions.yaml
+#     - ansible-playbook ./ansible-playbooks/master.yaml
+#   tags:
+#     - banuka
+
+master-minion:
+  stage: master-minion
+  retry:
+    max: 2
+    when:
+      - always
   script:
-    - echo "ansible"
     - ansible-playbook ./ansible-playbooks/master_and_minions.yaml
+  when: delayed
+  start_in: 10 seconds
+  tags:
+    - banuka
+
+master:
+  stage: master
+  retry:
+    max: 2
+    when:
+      - always
+  script:
     - ansible-playbook ./ansible-playbooks/master.yaml
+  when: delayed
+  start_in: 10 seconds
   tags:
     - banuka
 
@@ -108,7 +135,7 @@ join-nodes:
   retry:
     max: 2
     when:
-      - always  
+      - always
   script:
     - ansible-playbook ./ansible-playbooks/join_master_and_hosts.yaml
   when: delayed
