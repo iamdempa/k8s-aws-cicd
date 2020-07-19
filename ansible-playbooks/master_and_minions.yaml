@@ -13,9 +13,9 @@
         name: apt-transport-https
         state: present
 
-    # - name: APT Key
-    #   become: true
-    #   shell: "curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -"
+    - name: APT Key
+      become: true
+      shell: "curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -"
 
     # - name: CAT
     #   become: true
