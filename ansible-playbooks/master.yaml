@@ -28,7 +28,3 @@
       shell: |
         kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 
-    - name: Print the join token
-      become: ubuntu
-      shell: |
-        kubeadm token create --print-join-command
