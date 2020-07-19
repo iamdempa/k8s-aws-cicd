@@ -9,7 +9,12 @@
 
     - name: set fact
       set_fact:
-        myvar: "{{ token.stdout }}"
+        joincommand: "{{ token.stdout }}"
+
+    - name: Print
+      become: true
+      shell: |
+        echo {{joincommand}} > a.txt
 
 - hosts: kube-minions
   tasks:
