@@ -16,7 +16,7 @@ variable "private_key_path" {
 
 variable "minion-count" {
   type = "string"
-  default = "3"
+  default = "2"
 }
 
 variable "ec2-ami" {
