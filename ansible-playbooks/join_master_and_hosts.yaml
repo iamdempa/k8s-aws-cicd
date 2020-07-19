@@ -1,0 +1,17 @@
+---
+- hosts: kube-master
+  tasks:
+    - name: Copy the file
+      
+      copy:
+        src: "/etc/ansible/hosts"
+        dest: "/root/onlymaster.txt"
+      set_fact:
+        banuka: "banuka"
+
+- hosts: kube-minions
+  tasks:
+    - name: Copy the file
+      copy:
+        src: "/etc/ansible/hosts"
+        dest: "/root/{{banuka}}/onlyminions.txt"        
