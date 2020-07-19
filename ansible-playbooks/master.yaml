@@ -9,7 +9,7 @@
     - name: Change hostname
       become: true
       shell: |
-        sudo hostname kube-master 
+        sudo hostname kube-master
 
     - name: Initialize kubeadm
       become: ubuntu
@@ -32,4 +32,3 @@
       become: ubuntu
       shell: |
         kubeadm token create --print-join-command
-      
