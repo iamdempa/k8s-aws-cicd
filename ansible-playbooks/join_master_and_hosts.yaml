@@ -35,5 +35,5 @@
     - name: Join the minions
       become: true
       shell: |
-        cd /root
+        cd /root/
         ./join.sh
