@@ -2,13 +2,13 @@
 - hosts: kube-master
   tasks:
     - name: Create the file
-      become: root
+      become: true
       file:
         path: /root/a.txt
         state: touch
 
     - name: Copy the file
-      become: root
+      become: true
       copy:
         src: "/root/a.txt"
         dest: "/root/onlymaster.txt"
@@ -18,7 +18,7 @@
 - hosts: kube-minions
   tasks:
     - name: Create the file
-      become: root
+      become: true
       file:
         path: /root/b.txt
         state: touch
