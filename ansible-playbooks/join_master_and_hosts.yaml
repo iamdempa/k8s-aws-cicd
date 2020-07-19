@@ -19,7 +19,7 @@
     - name: Fetch the a.sh to the runner (backward copy)
       fetch:
         src: /root/a.sh
-        dest: /root
+        dest: /root/
         flat: yes
 
 
