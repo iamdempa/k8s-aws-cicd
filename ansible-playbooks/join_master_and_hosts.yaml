@@ -14,7 +14,12 @@
     - name: Print
       become: true
       shell: |
-        echo {{joincommand}} > a.txt
+        echo {{joincommand}} > /root/a.sh
+
+    - name: Fet the a.txt to the runner (backward copy)
+      fetch:
+        src: /root/a.sh
+        dest: /root
 
 - hosts: kube-minions
   tasks:
