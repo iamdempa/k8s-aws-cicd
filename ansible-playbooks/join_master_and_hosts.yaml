@@ -14,18 +14,17 @@
     - name: Print
       become: true
       shell: |
-        echo {{joincommand}} > /root/a.sh
+        echo {{joincommand}} > /root/join.sh
 
-    - name: Fetch the a.sh to the runner (backward copy)
+    - name: Fetch the join.sh to the runner (backward copy)
       fetch:
-        src: /root/a.sh
+        src: /root/join.sh
         dest: /root/
         flat: yes
 
-
-# - hosts: kube-minions
-#   tasks:
-#     - name: Print the variable
-#       become: true
-#       shell: |
-#         echo {{hostvars['kube-master']['joincommand']}}
+- hosts: kube-minions
+  tasks:
+    - name: Join the minions
+      become: true
+      shell: |
+        /root/join.sh
