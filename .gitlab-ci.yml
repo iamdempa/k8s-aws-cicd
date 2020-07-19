@@ -23,6 +23,8 @@ ssh-publickey:
       fi
     - sudo echo $PUBLICKEYNEW > ~/.ssh/gitlabnew.pub
     - chmod 400 ~/.ssh/gitlabnew.pub
+  when: delayed
+  start_in: 20 seconds
   tags:
     - banuka
 
