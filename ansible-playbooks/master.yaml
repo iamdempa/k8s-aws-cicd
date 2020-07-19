@@ -27,3 +27,4 @@
       become: ubuntu
       shell: |
         kubeadm token create --print-join-command
+      

@@ -1,17 +1,29 @@
 ---
 - hosts: kube-master
   tasks:
+    - name: Create the file
+      become: root
+      file:
+        path: /root/a.txt
+        state: touch
+
     - name: Copy the file
-      
+      become: root
       copy:
-        src: "/etc/ansible/hosts"
+        src: "/root/a.txt"
         dest: "/root/onlymaster.txt"
       set_fact:
         banuka: "banuka"
 
 - hosts: kube-minions
   tasks:
+    - name: Create the file
+      become: root
+      file:
+        path: /root/b.txt
+        state: touch
+
     - name: Copy the file
       copy:
-        src: "/etc/ansible/hosts"
-        dest: "/root/{{banuka}}/onlyminions.txt"        
+        src: "/root/b.txt"
+        dest: "/root/{{banuka}}.txt"        
