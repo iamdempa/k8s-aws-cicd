@@ -99,7 +99,7 @@ ansible-commands:
     - echo "ansible"    
     - ansible-playbook ./ansible-playbooks/master_and_minions.yaml
     - ansible-playbook ./ansible-playbooks/master.yaml
-    - ansible-playbook ./ansible-playbooks/join_master_and_hosts.yaml
+    # - ansible-playbook ./ansible-playbooks/join_master_and_hosts.yaml
   tags:
     - banuka
 
