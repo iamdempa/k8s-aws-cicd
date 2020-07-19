@@ -4,13 +4,16 @@
     - name: Print the value
       become: true
       shell: |
-        echo "hi"
+        kubeadm token create --print-join-command 2> /dev/null
+      register: token
+
+    - name: set fact
       set_fact:
-        banuka: <value-taken-from-above-shell-command>
+        myvar: "{{ token.stdout }}"
 
 - hosts: kube-minions
   tasks:
     - name: Print the variable
       become: true
       shell: |
-        echo {{banuka}}
+        echo "{{ hostvars['kube-master'].myvar }}"
