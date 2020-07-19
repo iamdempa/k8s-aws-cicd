@@ -25,7 +25,7 @@ create-ssh-key-pair:
     - chmod 400 ~/.ssh/gitlabnew.pub
 
   tags:
-    - banuka
+    - banuka-docker
 
 prerequisites-install:
   stage: prerequisites-install
@@ -33,7 +33,7 @@ prerequisites-install:
     - echo "hi"
     - sudo yum update -y && sudo yum install wget unzip -y
   tags:
-    - banuka
+    - banuka-docker
 
 install_terraform:
   stage: install-terraform
@@ -46,7 +46,7 @@ install_terraform:
     - rm -rf terraform_${VER}_linux_amd64.zip
     - which terraform
   tags:
-    - banuka
+    - banuka-docker
 
 deploy:
   stage: deploy
@@ -56,7 +56,7 @@ deploy:
     - terraform plan
     - terraform apply --auto-approve
   tags:
-    - banuka
+    - banuka-docker
 
 restart-sshd:
   stage: restart-sshd
@@ -77,7 +77,7 @@ restart-sshd:
     - service sshd restart
     - ls
   tags:
-    - banuka
+    - banuka-docker
 
 test-ansible:
   stage: test-ansible
@@ -91,7 +91,7 @@ test-ansible:
   when: delayed
   start_in: 30 seconds
   tags:
-    - banuka
+    - banuka-docker
 
 # ansible-commands:
 #   stage: ansible-commands
@@ -100,7 +100,7 @@ test-ansible:
 #     - ansible-playbook ./ansible-playbooks/master_and_minions.yaml
 #     - ansible-playbook ./ansible-playbooks/master.yaml
 #   tags:
-#     - banuka
+#     - banuka-docker
 
 ansible-playbooks:
   stage: ansible-playbooks
@@ -116,7 +116,7 @@ ansible-playbooks:
   when: delayed
   start_in: 10 seconds
   tags:
-    - banuka
+    - banuka-docker
 
 destroy:
   stage: destroy
@@ -125,4 +125,4 @@ destroy:
     - terraform destroy --auto-approve
   when: manual
   tags:
-    - banuka
+    - banuka-docker
