@@ -1,29 +1,16 @@
 ---
 - hosts: kube-master
   tasks:
-    - name: Create the file
+    - name: Print the value
       become: true
-      file:
-        path: /root/a.txt
-        state: touch
-
-    - name: Copy the file
-      become: true
-      copy:
-        src: "/root/a.txt"
-        dest: "/root/onlymaster.txt"
+      shell: |
+        echo "hi"
       set_fact:
-        banuka: "banuka"
+        banuka: <value-taken-from-above-shell-command>
 
 - hosts: kube-minions
   tasks:
-    - name: Create the file
+    - name: Print the variable
       become: true
-      file:
-        path: /root/b.txt
-        state: touch
-
-    - name: Copy the file
-      copy:
-        src: "/root/b.txt"
-        dest: "/root/{{banuka}}.txt"        
+      shell: |
+        echo {{banuka}}

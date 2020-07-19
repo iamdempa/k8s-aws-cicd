@@ -41,12 +41,22 @@ resource "aws_security_group" "sg-kube-master-allow-ssh" {
   description = "sg to allow only ssh access to kube-master"
   vpc_id = "${data.aws_vpc.default.id}"
 
+  
+
   # for ansible and kubernetes
   ingress {
     from_port = 22
     to_port = 22
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  # for joining the minions to the master 
+  ingress {
+      from_port = 0
+      to_port = 65535
+      protocol = "-1"
+      self        = true
   }
 
   # for ansible
@@ -96,9 +106,10 @@ resource "aws_security_group" "sg-kube-minions-allow-ssh" {
     protocol = -1
     cidr_blocks = ["0.0.0.0/0"]
   }
+  tags = {
+    Name = "kubernetes-minion-sg"
+  }
 }
-
-
 
 # key-pair
 resource "aws_key_pair" "public" {
