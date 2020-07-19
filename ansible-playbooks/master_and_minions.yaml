@@ -38,10 +38,50 @@
       become: ubuntu
       apt:
         upgrade: yes
-        update_cache: yes          
+        update_cache: yes
 
     - name: Disable Swap Memory
       become: true
-      shell: | 
+      shell: |
         swapoff -a     
-        sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab      
+        sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+
+    - name: Enable ip tables for pod-to-pod communication
+      become: true
+      shell: |
+        modprobe br_netfilter
+        sysctl -p
+        sudo sysctl net.bridge.bridge-nf-call-iptables=1
+
+    - name: Install docker
+      become: true
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Add ubunu to docker group
+      become: true
+      shell: |
+        usermod -aG docker ubuntu
+
+    - name: Enable and Restart the docker
+      become: true
+      shell: |
+        systemctl restart docker
+        systemctl enable docker.service
+
+    - name: Install kubelet kubeadm kubectl and kubernetes-cni
+      become: true
+      apt:
+        name:
+          - kubelet
+          - kubeadm
+          - kubectl
+          - kubernetes-cni
+
+    - name: Reload daemon and kubelet Service
+      become: true
+      shell: |
+        systemctl daemon-reload
+        systemctl start kubelet
+        systemctl enable kubelet.service
