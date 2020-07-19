@@ -5,3 +5,20 @@
       copy:
         src: "/etc/ansible/hosts"
         dest: "/root/onlymaster.txt"
+
+    - name: Initialize kubeadm
+      become: true
+      shell: |
+        kubeadm init
+
+    - name: Create .kube file and copy admin.conf
+      become: ubuntu
+      shell: |
+        mkdir -p $HOME/.kube
+        sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config   
+        sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+    - name: Apply cni puglin
+      become: ubuntu
+      shell: |
+        kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
