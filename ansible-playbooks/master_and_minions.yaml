@@ -40,11 +40,8 @@
         upgrade: yes
         update_cache: yes
 
-    - name: Disable Swap Memory One
-      become: true
-      shell: "swapoff -a / swapoff -a"
-
     - name: Disable Swap Memory
       become: true
-      shell: |      
+      shell: | 
+        swapoff -a     
         sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab / sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab      
