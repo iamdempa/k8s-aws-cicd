@@ -30,9 +30,10 @@
       copy:
         src: /root/join.sh
         dest: /root/join.sh
-         
+        mode: +x
+
     - name: Join the minions
       become: true
       shell: |
         cd /root
-        join.sh
+        ./join.sh
