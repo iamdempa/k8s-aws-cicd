@@ -92,10 +92,10 @@ ansible-commands:
     - banuka
 
 
-# destroy:
-#   stage: destroy
-#   script:
-#     - terraform init
-#     - terraform destroy --auto-approve
-#   tags:
-#     - banuka
+destroy:
+  stage: destroy
+  script:
+    - terraform init
+    - terraform destroy --auto-approve
+  tags:
+    - banuka

@@ -24,7 +24,15 @@
 
 - hosts: kube-minions
   tasks:
+
+    - name: Copy the join.sh
+      become: true
+      copy:
+        src: /root/join.sh
+        dest: /root/join.sh
+         
     - name: Join the minions
       become: true
       shell: |
-        /root/join.sh
+        cd /root
+        join.sh
