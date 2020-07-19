@@ -6,6 +6,7 @@ stages:
   - restart-sshd
   - test-ansible
   - ansible-commands
+  - join-nodes
   - destroy
 
 create-ssh-key-pair:
@@ -84,7 +85,7 @@ test-ansible:
   retry:
     max: 2
     when:
-      - always  
+      - always
   script:
     - ansible -m ping all
     - ls
@@ -96,10 +97,22 @@ test-ansible:
 ansible-commands:
   stage: ansible-commands
   script:
-    - echo "ansible"    
+    - echo "ansible"
     - ansible-playbook ./ansible-playbooks/master_and_minions.yaml
     - ansible-playbook ./ansible-playbooks/master.yaml
-    # - ansible-playbook ./ansible-playbooks/join_master_and_hosts.yaml
+  tags:
+    - banuka
+
+join-nodes:
+  stage: join-nodes
+  retry:
+    max: 2
+    when:
+      - always  
+  script:
+    - ansible-playbook ./ansible-playbooks/join_master_and_hosts.yaml
+  when: delayed
+  start_in: 30 seconds
   tags:
     - banuka
 
