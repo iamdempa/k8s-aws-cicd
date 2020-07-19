@@ -71,20 +71,16 @@ restart-sshd:
     - cd ~/.ssh
     - service sshd restart
     - ls
-  when: delayed
-  start_in: 20 seconds
   tags:
     - banuka
 
 test-ansible:
   stage: test-ansible
-  retry:
-    max: 2
-    when:
-      - always
   script:
     - ansible -m ping all
     - ls
+  when: delayed
+  start_in: 20 seconds    
   tags:
     - banuka
 
