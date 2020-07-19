@@ -5,9 +5,7 @@ stages:
   - deploy
   - restart-sshd
   - test-ansible
-  - master-minion
-  - master
-  - join-nodes
+  - ansible-playbooks
   - destroy
 
 create-ssh-key-pair:
@@ -104,8 +102,8 @@ test-ansible:
 #   tags:
 #     - banuka
 
-master-minion:
-  stage: master-minion
+ansible-playbooks:
+  stage: ansible-playbooks
   retry:
     max: 2
     when:

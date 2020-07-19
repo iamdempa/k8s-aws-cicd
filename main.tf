@@ -131,6 +131,7 @@ resource "aws_instance" "kubernetes_master" {
               sudo amazon-linux-extras install ansible2 -y
               echo "${file("${var.public_key_path}")}" >> /root/.ssh/authorized_keys
               echo "${file("${var.gitlabnew_login_key_path}")}" >> /root/.ssh/gitlabnew_login_key_path.txt
+              sudo hostname kube-master
               pwd
             EOF
 
@@ -150,7 +151,8 @@ resource "aws_instance" "kubernetes_minion" {
 
   user_data = <<-EOF
               #!/bin/bash           
-              echo "${file("${var.public_key_path}")}" >> /root/.ssh/authorized_keys                   
+              echo "${file("${var.public_key_path}")}" >> /root/.ssh/authorized_keys  
+              sudo hostname kube-minion-${count.index}             
             EOF
 
   tags = {
