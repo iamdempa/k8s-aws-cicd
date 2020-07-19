@@ -15,18 +15,20 @@
       become: true
       shell: "curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -"
 
-    - name: create the file
+    - name: create folder if not exists
+      become: true
       file:
-        path: path=/etc/apt/sources.list.d/kubernetes.list
-        state: touch
+        path: /etc/apt/sources.list.d
+        state: directory
+        owner: root
+        group: root
+        mode: 0775
 
-    - name: Check if (/etc/apt/sources.list.d/kubernetes.list) exists
-      stat:
+    - name: create file
+      become: true
+      file:
         path: /etc/apt/sources.list.d/kubernetes.list
-      register: file_path
-    - debug:
-        msg: "File written successfully"
-      when: file_path.stat.exists == true
+        state: touch        
 
     # - name: Remove file (delete file)
     #   file:
