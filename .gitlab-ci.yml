@@ -3,8 +3,8 @@ stages:
   - prerequisites-install
   - install-terraform
   - deploy
+  - restart-sshd
   - test-ansible
-
   - ansible-commands
   - destroy
 
@@ -23,8 +23,7 @@ ssh-publickey:
       fi
     - sudo echo $PUBLICKEYNEW > ~/.ssh/gitlabnew.pub
     - chmod 400 ~/.ssh/gitlabnew.pub
-  when: delayed
-  start_in: 20 seconds
+
   tags:
     - banuka
 
@@ -61,12 +60,8 @@ deploy:
   tags:
     - banuka
 
-test-ansible:
-  stage: test-ansible
-  retry:
-    max: 2
-    when:
-      - always
+restart-sshd:
+  stage: restart-sshd
   script:
     - pwd
     - export ANSIBLE_HOST_KEY_CHECKING=False
@@ -76,8 +71,19 @@ test-ansible:
     - cd ~/.ssh
     - service sshd restart
     - ls
-    # - rm -rf known_hosts
-    # - ansible -m ping all
+  when: delayed
+  start_in: 20 seconds
+  tags:
+    - banuka
+
+test-ansible:
+  stage: test-ansible
+  retry:
+    max: 2
+    when:
+      - always
+  script:
+    - ansible -m ping all
     - ls
   tags:
     - banuka
@@ -86,18 +92,17 @@ ansible-commands:
   stage: ansible-commands
   script:
     - echo "ansible"
-    # - ansible-playbook ./ansible-playbooks/copyfile.yaml
-    # - ansible-playbook ./ansible-playbooks/master_and_minions.yaml
-    # - ansible-playbook ./ansible-playbooks/master.yaml
-    # - ansible-playbook ./ansible-playbooks/join_master_and_hosts.yaml
+    - ansible-playbook ./ansible-playbooks/copyfile.yaml
+    - ansible-playbook ./ansible-playbooks/master_and_minions.yaml
+    - ansible-playbook ./ansible-playbooks/master.yaml
+    - ansible-playbook ./ansible-playbooks/join_master_and_hosts.yaml
+
   tags:
     - banuka
-
-
-destroy:
-  stage: destroy
-  script:
-    - terraform init
-    - terraform destroy --auto-approve
-  tags:
-    - banuka
+# destroy:
+#   stage: destroy
+#   script:
+#     - terraform init
+#     - terraform destroy --auto-approve
+#   tags:
+#     - banuka
