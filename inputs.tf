@@ -25,10 +25,10 @@ variable "ec2-ami" {
   # default = "ami-07ebfd5b3428b6f4d"
 
   #centos
-  # default = "ami-0a887e401f7654935"
+  default = "ami-0a887e401f7654935"
 
-  #ubuntu - 64-bit x86
-  default = "ami-0ac80df6eff0e70b5"
+  # #ubuntu - 64-bit x86
+  # default = "ami-0ac80df6eff0e70b5"
 
 }
 
