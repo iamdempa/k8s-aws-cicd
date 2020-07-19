@@ -1,11 +1,11 @@
 ---
 - hosts: all
   tasks:
-    # - name: Update and upgrade apt packages
-    #   become: ubuntu
-    #   apt:
-    #     upgrade: yes
-    #     update_cache: yes
+    - name: Update and upgrade apt packages
+      become: ubuntu
+      apt:
+        upgrade: yes
+        update_cache: yes
 
     - name: install apt-transport-https
       become: ubuntu
@@ -20,19 +20,19 @@
     #     path: path=/etc/apt/sources.list.d/kubernetes.list
     #     state: touch
 
-    - name: Check if (/etc/apt/sources.list.d/kubernetes.list) exists
-      stat:
-        path: /etc/apt/sources.list.d/kubernetes.list
-      register: file_path
-    - debug:
-        msg: "File written successfully"
-      when: file_path.stat.exists == true
+    # - name: Check if (/etc/apt/sources.list.d/kubernetes.list) exists
+    #   stat:
+    #     path: /etc/apt/sources.list.d/kubernetes.list
+    #   register: file_path
+    # - debug:
+    #     msg: "File written successfully"
+    #   when: file_path.stat.exists == true
 
-    - name: Remove file (delete file)
-      file:
-        path: /etc/apt/sources.list.d/kubernetes.list
-        state: absent
-      when: file_path.stat.exists == true
+    # - name: Remove file (delete file)
+    #   file:
+    #     path: /etc/apt/sources.list.d/kubernetes.list
+    #     state: absent
+    #   when: file_path.stat.exists == true
 
 
     # # - name: write to the file
