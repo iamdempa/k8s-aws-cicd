@@ -17,12 +17,19 @@
       become: true
       shell: "curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -"
 
-    - name: CAT
+    - name: create the file
+      file: path=/etc/apt/sources.list.d/kubernetes.list state=touch   
+
+    - stat: path=/etc/apt/sources.list.d/kubernetes.list
+      register: file_path
+    - debug: msg="File exists successfully"
+      when: file_path.stat.exists == true
+
+    - name: write to the file
       become: true
-      shell: |
-        cat <<EOF > /etc/apt/sources.list.d/kubernetes.list
-                    deb https://apt.kubernetes.io/ kubernetes-xenial main        
-              EOF  
+      copy: content="deb https://apt.kubernetes.io/ kubernetes-xenial main" dest="/etc/apt/sources.list.d/kubernetes.list"
+      when: file_path.stat.exists == true
+
           
     - name: Update and upgrade apt packages
       become: true
