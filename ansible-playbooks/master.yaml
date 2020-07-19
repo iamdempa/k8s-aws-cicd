@@ -1,0 +1,7 @@
+---
+- hosts: kube-master
+  tasks:
+    - name: Copy the file
+      copy:
+        src: "/etc/ansible/hosts"
+        dest: "/root/onlymaster.txt"

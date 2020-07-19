@@ -86,6 +86,7 @@ ansible-commands:
     - echo "ansible"
     - ansible-playbook ./ansible-playbooks/copyfile.yaml
     - ansible-playbook ./ansible-playbooks/master_and_minions.yaml
+    - ansible-playbook ./ansible-playbooks/master.yaml
   tags:
     - banuka
 # destroy:
