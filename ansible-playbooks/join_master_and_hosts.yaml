@@ -25,11 +25,11 @@
 - hosts: kube-minions
   tasks:
 
-    - name: Change hostname
-      become: true
-      with_items: groups['kube-minions']
-      shell: |
-        sudo hostname kube-minion-{{ item }}
+    # - name: Change hostname
+    #   become: true
+    #   with_items: groups['kube-minions']
+    #   shell: |
+    #     sudo hostname kube-minion-{{ item }}
 
     - name: Copy the join.sh
       become: true
