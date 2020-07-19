@@ -9,9 +9,7 @@
 
     - name: install apt-transport-https
       become: ubuntu
-      apt:
-        name: apt-transport-https
-        state: present
+      apt: update_cache=yes force_apt_get=yes
 
     - name: APT Key
       become: true
@@ -37,6 +35,4 @@
 
     - name: Update and upgrade apt packages
       become: true
-      apt:
-        upgrade: yes
-        update_cache: yes
+      apt: update_cache=yes force_apt_get=yes
