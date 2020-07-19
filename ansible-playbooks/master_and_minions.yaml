@@ -25,10 +25,10 @@
     - debug: msg="File exists successfully"
       when: file_path.stat.exists == true
 
-    - name: write to the file
-      become: true
-      copy: content="deb https://apt.kubernetes.io/ kubernetes-xenial main" dest="/etc/apt/sources.list.d/kubernetes.list"
-      when: file_path.stat.exists == true
+    # - name: write to the file
+    #   become: true
+    #   copy: content="deb https://apt.kubernetes.io/ kubernetes-xenial main" dest="/etc/apt/sources.list.d/kubernetes.list"
+    #   when: file_path.stat.exists == true
 
           
     - name: Update and upgrade apt packages
