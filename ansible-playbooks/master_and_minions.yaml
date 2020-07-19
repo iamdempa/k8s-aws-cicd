@@ -14,3 +14,32 @@
     - name: APT Key
       become: true
       shell: "curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -"
+
+    # - name: create the file
+    #   file:
+    #     path: path=/etc/apt/sources.list.d/kubernetes.list
+    #     state: touch
+
+    # - name: Check if (/etc/apt/sources.list.d/kubernetes.list) exists
+    #   stat:
+    #     path: /etc/apt/sources.list.d/kubernetes.list
+    #   register: file_path
+    # - debug:
+    #     msg: "File written successfully"
+    #   when: file_path.stat.exists == true
+
+    # - name: Remove file (delete file)
+    #   file:
+    #     path: /etc/apt/sources.list.d/kubernetes.list
+    #     state: absent
+    #   when: file_path.stat.exists == true
+
+
+    # # - name: write to the file
+    # #   become: true
+    # #   copy: content="deb https://apt.kubernetes.io/ kubernetes-xenial main" dest="/etc/apt/sources.list.d/kubernetes.list"
+    # #   when: file_path.stat.exists == true
+
+    # - name: Update and upgrade apt packages
+    #   become: true
+    #   apt: update_cache=yes force_apt_get=yes
