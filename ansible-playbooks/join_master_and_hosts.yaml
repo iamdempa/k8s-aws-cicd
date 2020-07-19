@@ -21,4 +21,4 @@
     - name: Print the variable
       become: true
       shell: |
-        echo {{myvar}}
+        echo {{joincommand}}
