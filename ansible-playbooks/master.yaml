@@ -7,21 +7,21 @@
         dest: "/root/onlymaster.txt"
 
     - name: Initialize kubeadm
-      become: true
+      become: ubuntu
       shell: |
-        kubeadm init
+        sudo kubeadm init --pod-network-cidr=192.168.0.0/16
 
-    - name: Create .kube file and copy admin.conf
+    - name: Start the cluster with the current user
       become: ubuntu
       shell: |
         mkdir -p $HOME/.kube
-        sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config   
+        sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
         sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
-    - name: Apply cni puglin
+    - name: Set the calico network
       become: ubuntu
       shell: |
-        kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+        kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 
     - name: Print the join token
       become: ubuntu

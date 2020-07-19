@@ -12,11 +12,21 @@
       apt: update_cache=yes force_apt_get=yes
 
     - name: APT Key
-      become: true
-      shell: "curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -"
+      become: ubuntu
+      shell: "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -"
+
+    - name: Add docker repository
+      become: ubuntu
+      shell: |
+        sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
+    - name: Add GPG key for kubernetes
+      become: ubuntu
+      shell: |
+        curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 
     - name: create folder if not exists
-      become: true
+      become: ubuntu
       file:
         path: /etc/apt/sources.list.d
         state: directory
@@ -25,13 +35,13 @@
         mode: 0775
 
     - name: create file
-      become: true
+      become: ubuntu
       file:
         path: /etc/apt/sources.list.d/kubernetes.list
         state: touch
 
     - name: write to the file
-      become: true
+      become: ubuntu
       copy: content="deb https://apt.kubernetes.io/ kubernetes-xenial main" dest="/etc/apt/sources.list.d/kubernetes.list"
 
     - name: Update and upgrade apt packages
@@ -40,48 +50,21 @@
         upgrade: yes
         update_cache: yes
 
-    - name: Disable Swap Memory
-      become: true
-      shell: |
-        swapoff -a     
-        sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
-
-    - name: Enable ip tables for pod-to-pod communication
-      become: true
-      shell: |
-        modprobe br_netfilter
-        sysctl -p
-        sudo sysctl net.bridge.bridge-nf-call-iptables=1
-
-    - name: Install docker
-      become: true
-      apt:
-        name: docker.io
-        state: present
-
-    - name: Add ubunu to docker group
-      become: true
-      shell: |
-        usermod -aG docker ubuntu
-
-    - name: Enable and Restart the docker
-      become: true
-      shell: |
-        systemctl restart docker
-        systemctl enable docker.service
-
     - name: Install kubelet kubeadm kubectl and kubernetes-cni
-      become: true
-      apt:
-        name:
-          - kubelet
-          - kubeadm
-          - kubectl
-          - kubernetes-cni
+      become: ubuntu
+      shell: | 
+        sudo apt-get install -y docker-ce=5:19.03.11~3-0~ubuntu-$(lsb_release -cs) kubelet=1.18.2-00 kubeadm=1.18.2-00 kubectl=1.18.2-00  
 
-    - name: Reload daemon and kubelet Service
-      become: true
+
+    - name: Hold the versions of kubelet kubeadm kubectl being accidently upgraded
+      become: ubuntu
       shell: |
-        systemctl daemon-reload
-        systemctl start kubelet
-        systemctl enable kubelet.service
+        sudo apt-mark hold docker-ce kubelet kubeadm kubectl
+
+    - name: Enable the IP tables andte make immediate changes (second line)
+      become: ubuntu
+      shell: |
+        echo "net.bridge.bridge-nf-call-iptables=1" | sudo tee -a /etc/sysctl.conf
+        sudo sysctl -p
+
+    

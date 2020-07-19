@@ -80,21 +80,22 @@ test-ansible:
   tags:
     - banuka
 
-# ansible-commands:
-#   stage: ansible-commands
-#   script:
-#     - echo "ansible"
-#     - ansible-playbook ./ansible-playbooks/copyfile.yaml
-#     - ansible-playbook ./ansible-playbooks/master_and_minions.yaml
-#     - ansible-playbook ./ansible-playbooks/master.yaml
-#     - ansible-playbook ./ansible-playbooks/join_master_and_hosts.yaml
-#   tags:
-#     - banuka
-destroy:
-  stage: destroy
+ansible-commands:
+  stage: ansible-commands
   script:
-    - terraform init
-    - terraform destroy --auto-approve
+    - echo "ansible"
+    - ansible-playbook ./ansible-playbooks/copyfile.yaml
+    - ansible-playbook ./ansible-playbooks/master_and_minions.yaml
+    - ansible-playbook ./ansible-playbooks/master.yaml
+    - ansible-playbook ./ansible-playbooks/join_master_and_hosts.yaml
   tags:
     - banuka
 
+    
+# destroy:
+#   stage: destroy
+#   script:
+#     - terraform init
+#     - terraform destroy --auto-approve
+#   tags:
+#     - banuka
