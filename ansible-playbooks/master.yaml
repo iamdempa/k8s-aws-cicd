@@ -6,6 +6,11 @@
         src: "/etc/ansible/hosts"
         dest: "/root/onlymaster.txt"
 
+    - name: Change hostname
+      become: true
+      shell: |
+        sudo hostname kube-master 
+
     - name: Initialize kubeadm
       become: ubuntu
       shell: |

@@ -25,6 +25,11 @@
 - hosts: kube-minions
   tasks:
 
+    - name: Change hostname
+      become: true
+      shell: |
+        sudo hostname kube-minion 
+
     - name: Copy the join.sh
       become: true
       copy:

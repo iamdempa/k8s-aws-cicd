@@ -1,0 +1,7 @@
+
+firstcolor green
+lastname jananath
+# age 25
+
+
+firstname banuka
